@@ -1,0 +1,112 @@
+import { createBrowserRouter } from "react-router-dom";
+import { Layout } from "@/components/layout";
+
+import Home from "@/pages/home/home";
+import Config from "@/pages/config/config";
+
+import PersonConfig from "@/pages/config/person/person-config";
+import PersonAll from "@/pages/config/person/person-all";
+import PersonAlready from "@/pages/config/person/person-already";
+
+import PrizeConfig from "@/pages/config/prize/prize";
+
+import FaceConfig from "@/pages/config/global/face";
+import ImageConfig from "@/pages/config/global/image";
+import MusicConfig from "@/pages/config/global/music";
+
+import Readme from "@/pages/config/readme/readme";
+
+export const configRoutes: any = {
+  path: "config",
+  Component: Config,
+  children: [
+    {
+      path: "person",
+      Component: PersonConfig,
+      meta: {
+        title: "Person",
+        icon: "person",
+      },
+      children: [
+        {
+          path: "all",
+          Component: PersonAll,
+          meta: {
+            title: "Personnel list",
+            icon: "all",
+          },
+        },
+        {
+          path: "already",
+          Component: PersonAlready,
+          meta: {
+            title: "Winner list",
+            icon: "already",
+          },
+        },
+      ],
+    },
+    {
+      path: "prize",
+      Component: PrizeConfig,
+      meta: {
+        title: "Prize config",
+        icon: "prize",
+      },
+    },
+    {
+      path: "global",
+      meta: {
+        title: "Global config",
+        icon: "global",
+      },
+      children: [
+        {
+          path: "face",
+          Component: FaceConfig,
+          meta: {
+            title: "Interface config",
+            icon: "face",
+          },
+        },
+        {
+          path: "image",
+          Component: ImageConfig,
+          meta: {
+            title: "Image list",
+            icon: "image",
+          },
+        },
+        {
+          path: "music",
+          Component: MusicConfig,
+          meta: {
+            title: "Music list",
+            icon: "music",
+          },
+        },
+      ],
+    },
+    {
+      path: "readme",
+      Component: Readme,
+      meta: {
+        title: "Instruction",
+        icon: "readme",
+      },
+    },
+  ],
+};
+
+export const routers = createBrowserRouter([
+  {
+    Component: Layout,
+    children: [
+      {
+        path: "",
+        Component: Home,
+      },
+      configRoutes,
+    ],
+  },
+]);
