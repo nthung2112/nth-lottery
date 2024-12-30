@@ -4,7 +4,6 @@ import { Layout } from "@/components/layout";
 import Home from "@/pages/home/home";
 import Config from "@/pages/config/config";
 
-import PersonConfig from "@/pages/config/person/person-config";
 import PersonAll from "@/pages/config/person/person-all";
 import PersonAlready from "@/pages/config/person/person-already";
 
@@ -22,7 +21,6 @@ export const configRoutes: any = {
   children: [
     {
       path: "person",
-      Component: PersonConfig,
       meta: {
         title: "Person",
         icon: "person",
