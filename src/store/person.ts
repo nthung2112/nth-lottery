@@ -126,8 +126,8 @@ export const usePersonStore = create<PersonState>()(
 );
 
 // Selectors
-export const getAllPersonList = (state: PersonState) =>
-  state.personConfig.allPersonList.filter((item) => item);
+export const getAllPersonList = (personConfig: PersonConfigState) =>
+  personConfig.allPersonList.filter((item) => item);
 
 export const getNotThisPrizePersonList = (personConfig: PersonConfigState) => {
   const currentPrize = usePrizeStore.getState().prizeConfig.currentPrize;
