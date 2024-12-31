@@ -152,46 +152,37 @@ export default function FaceConfig() {
           </button>
         </div>
 
-        <label className="flex flex-row items-center w-full gap-24 mb-10 form-control">
+        <form className="space-y-4">
           <div>
-            <div className="label">
+            <label className="label">
               <span className="label-text">Title</span>
-            </div>
+            </label>
             <input
               type="text"
               value={globalConfig.topTitle}
               onChange={(e) => setTopTitle(e.target.value)}
               placeholder="Enter title"
-              className="w-full max-w-xs input input-bordered"
+              className="w-full max-w-xs input input-bordered input-sm"
             />
           </div>
-        </label>
 
-        <label className="flex flex-row items-center w-full gap-24 mb-10 form-control">
           <div>
-            <div className="label">
+            <label className="label">
               <span className="label-text">Number of columns</span>
-            </div>
+            </label>
             <input
               type="number"
               value={rowCountValue}
               onChange={(e) => setRowCountValue(Number(e.target.value))}
               placeholder="Type here"
-              className="w-full max-w-xs input input-bordered"
+              className="w-full max-w-xs input input-bordered input-sm"
             />
-            <div className="help">
-              {formError.rowCount && (
-                <span className="text-sm text-red-400 help-text">{formError.rowCount}</span>
-              )}
-            </div>
-          </div>
-          <div>
             <div
               className="tooltip"
               data-tip="This item is time consuming and performance intensive"
             >
               <button
-                className="mt-5 btn btn-info btn-sm"
+                className="ml-5 btn btn-info btn-sm"
                 disabled={isRowCountChange !== 1}
                 onClick={resetPersonLayout}
               >
@@ -200,155 +191,164 @@ export default function FaceConfig() {
               </button>
             </div>
           </div>
-        </label>
 
-        {/* Theme Selector */}
-        <label className="w-full max-w-xs form-control">
-          <div className="label">
-            <span className="label-text">Select theme</span>
-          </div>
-          <select
-            data-choose-theme
-            className="w-full max-w-xs border-solid select border-1 capitalize"
-            value={themeConfig.name}
-            onChange={(e) => setThemeValue(e.target.value)}
-          >
-            <option disabled>Select topic</option>
-            {themeList.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        {/* Background Image Selector */}
-        <label className="w-full max-w-xs form-control">
-          <div className="label">
-            <span className="label-text">Select background image</span>
-          </div>
-          <select
-            className="w-full max-w-xs border-solid select border-1 capitalize"
-            value={themeConfig.background?.id}
-            onChange={(e) => {
-              const selected = [{ name: "None", url: "", id: "" }, ...globalConfig.imageList].find(
-                (item) => item.id === e.target.value
-              );
-              setBackground(selected as any);
-            }}
-          >
-            <option disabled>Select background image</option>
-            {[{ name: "None", url: "", id: "" }, ...globalConfig.imageList].map((item, index) => (
-              <option key={index} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        {/* Color Pickers */}
-        <label className="w-full max-w-xs form-control">
-          <div className="label">
-            <span className="label-text">Card color</span>
-          </div>
-          <input
-            type="color"
-            name="cardColor"
-            value={themeConfig.cardColor}
-            onChange={(e) => setCardColor(e.target.value)}
-          />
-        </label>
-
-        <label className="w-full max-w-xs form-control">
-          <div className="label">
-            <span className="label-text">Winning card color</span>
-          </div>
-          <input
-            type="color"
-            name="luckyCardColorValue"
-            value={themeConfig.luckyCardColor}
-            onChange={(e) => setLuckyCardColor(e.target.value)}
-          />
-        </label>
-
-        <label className="w-full max-w-xs form-control">
-          <div className="label">
-            <span className="label-text">Text color</span>
-          </div>
-          <input
-            type="color"
-            name="textColor"
-            value={themeConfig.textColor}
-            onChange={(e) => setTextColor(e.target.value)}
-          />
-        </label>
-
-        <label className="flex flex-row w-full max-w-xs gap-10 mb-10 form-control">
           <div>
-            <div className="label">
-              <span className="label-text">Card width</span>
-            </div>
+            <label className="label">
+              <span className="label-text">Select theme</span>
+            </label>
+            <select
+              data-choose-theme
+              className="w-full max-w-xs border-solid select select-sm select-bordered border-1 capitalize"
+              value={themeConfig.name}
+              onChange={(e) => setThemeValue(e.target.value)}
+            >
+              <option disabled>Select topic</option>
+              {themeList.map((item, index) => (
+                <option key={index} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="label">
+              <span className="label-text">Select background image </span>
+            </label>
+            <select
+              className="w-full max-w-xs border-solid select select-sm select-bordered border-1 capitalize"
+              value={themeConfig.background?.id}
+              onChange={(e) => {
+                const selected = [
+                  { name: "None", url: "", id: "" },
+                  ...globalConfig.imageList,
+                ].find((item) => item.id === e.target.value);
+                setBackground(selected as any);
+              }}
+            >
+              <option disabled>Select background image</option>
+              {[{ name: "None", url: "", id: "" }, ...globalConfig.imageList].map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="label">
+              <span className="label-text">Card color</span>
+            </label>
             <input
-              type="number"
-              value={themeConfig.cardWidth}
-              onChange={(e) =>
-                setCardSize({
-                  height: themeConfig.cardHeight,
-                  width: Number(e.target.value),
-                })
-              }
-              className="w-full max-w-xs input input-bordered"
+              type="color"
+              name="cardColor"
+              value={themeConfig.cardColor}
+              onChange={(e) => setCardColor(e.target.value)}
             />
           </div>
+
           <div>
-            <div className="label">
-              <span className="label-text">Card height</span>
-            </div>
+            <label className="label">
+              <span className="label-text">Winning card color</span>
+            </label>
             <input
-              type="number"
-              value={themeConfig.cardHeight}
-              onChange={(e) =>
-                setCardSize({
-                  width: themeConfig.cardWidth,
-                  height: Number(e.target.value),
-                })
-              }
-              className="w-full max-w-xs input input-bordered"
+              type="color"
+              name="luckyCardColor"
+              value={themeConfig.luckyCardColor}
+              onChange={(e) => setLuckyCardColor(e.target.value)}
             />
           </div>
-        </label>
 
-        <label className="w-full max-w-xs mb-10 form-control">
-          <div className="label">
-            <span className="label-text">Text size</span>
-          </div>
-          <input
-            type="number"
-            value={themeConfig.textSize}
-            onChange={(e) => setTextSize(Number(e.target.value))}
-            placeholder="Type here"
-            className="w-full max-w-xs input input-bordered"
-          />
-        </label>
-        <label className="w-full max-w-xs form-control">
-          <div className="label">
-            <span className="label-text">Highlight color</span>
-          </div>
-          <input
-            type="color"
-            name="patternColor"
-            value={themeConfig.patternColor}
-            onChange={(e) => setPatterColor(e.target.value)}
-          />
-        </label>
-
-        {/* Pattern Settings */}
-        <label className="flex flex-row items-center w-full gap-24 mb-0 form-control">
           <div>
-            <div className="label">
+            <label className="label">
+              <span className="label-text">Text color</span>
+            </label>
+            <input
+              type="color"
+              name="textColor"
+              value={themeConfig.textColor}
+              onChange={(e) => setTextColor(e.target.value)}
+            />
+          </div>
+
+          <div className="flex gap-2">
+            <div>
+              <label className="label">
+                <span className="label-text">Card width</span>
+              </label>
+              <input
+                type="number"
+                value={themeConfig.cardWidth}
+                onChange={(e) =>
+                  setCardSize({
+                    height: themeConfig.cardHeight,
+                    width: Number(e.target.value),
+                  })
+                }
+                className="max-w-xs input input-bordered input-sm"
+              />
+            </div>
+
+            <div>
+              <label className="label">
+                <span className="label-text">Card height</span>
+              </label>
+              <input
+                type="number"
+                value={themeConfig.cardHeight}
+                onChange={(e) =>
+                  setCardSize({
+                    width: themeConfig.cardWidth,
+                    height: Number(e.target.value),
+                  })
+                }
+                className="max-w-xs input input-bordered input-sm"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="label">
+              <span className="label-text">Text size</span>
+            </label>
+            <input
+              type="number"
+              value={themeConfig.textSize}
+              onChange={(e) => setTextSize(Number(e.target.value))}
+              placeholder="Type here"
+              className="w-full max-w-xs input input-bordered input-sm"
+            />
+          </div>
+
+          <div>
+            <label className="label">
+              <span className="label-text">Whether to always display the prize list</span>
+            </label>
+            <input
+              type="checkbox"
+              checked={globalConfig.isSHowPrizeList}
+              onChange={() => setIsShowPrizeList(!globalConfig.isSHowPrizeList)}
+              className="mt-2 border-solid checkbox checkbox-secondary border-1"
+            />
+          </div>
+
+          <div>
+            <label className="label">
+              <span className="label-text">Pattern color</span>
+            </label>
+            <input
+              type="color"
+              name="patternColor"
+              value={themeConfig.patternColor}
+              onChange={(e) => setPatterColor(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="label">
               <span className="label-text">Pattern settings</span>
-            </div>
-            <div className="h-auto">
+            </label>
+            <div className="h-auto w-fit">
               <PatternSetting
                 rowCount={globalConfig.rowCount}
                 cardColor={globalConfig.theme.cardColor}
@@ -358,34 +358,23 @@ export default function FaceConfig() {
               />
             </div>
           </div>
-        </label>
 
-        <div className="flex w-full h-24 gap-3 m-0">
-          <button className="mt-5 btn btn-info btn-sm" onClick={clearPattern}>
-            <span>Clear pattern settings</span>
-          </button>
-          <div
-            className="tooltip"
-            data-tip="The default pattern setting is effective for 17 columns. Please set the other number of columns by yourself."
-          >
-            <button className="mt-5 btn btn-info btn-sm" onClick={resetPattern}>
-              <span>Default pattern settings</span>
+          
+
+          <div className="flex gap-2">
+            <button className="mt-5 btn btn-info btn-sm" onClick={clearPattern}>
+              <span>Clear pattern settings</span>
             </button>
+            <div
+              className="tooltip"
+              data-tip="The default pattern setting is effective for 17 columns. Please set the other number of columns by yourself."
+            >
+              <button className="mt-5 btn btn-info btn-sm" onClick={resetPattern}>
+                <span>Default pattern settings</span>
+              </button>
+            </div>
           </div>
-        </div>
-
-        {/* Prize List Toggle */}
-        <label className="w-full max-w-xs mb-10 form-control">
-          <div className="label">
-            <span className="label-text">Whether to always display the prize list</span>
-          </div>
-          <input
-            type="checkbox"
-            checked={globalConfig.isSHowPrizeList}
-            onChange={() => setIsShowPrizeList(!globalConfig.isSHowPrizeList)}
-            className="mt-2 border-solid checkbox checkbox-secondary border-1"
-          />
-        </label>
+        </form>
       </div>
     </>
   );

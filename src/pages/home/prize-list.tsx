@@ -13,22 +13,22 @@ import defaultPrizeImage from "../../assets/images/龙.png";
 import "./prize-list.css";
 
 export function PrizeList() {
+  // Store
+  const { prizeConfig, setTemporaryPrize, setTemporaryPrizeValue, setCurrentPrize } =
+    usePrizeStore();
+  const { prizeList, currentPrize, temporaryPrize } = prizeConfig;
+  const { globalConfig } = useGlobalStore();
+  const { imageList, isSHowPrizeList } = globalConfig;
+  const { isMobile } = useSystemStore();
+
   // States
-  const [prizeShow, setPrizeShow] = useState(true);
+  const [prizeShow, setPrizeShow] = useState(isSHowPrizeList);
   const [selectedPrize, setSelectedPrize] = useState<IPrizeConfig | null>(null);
 
   // Refs
   const prizeListRef = useRef<HTMLUListElement>(null);
   const prizeListContainerRef = useRef<HTMLDivElement>(null);
   const temporaryPrizeRef = useRef<HTMLDialogElement>(null);
-
-  // Store
-  const { prizeConfig, setTemporaryPrize, setTemporaryPrizeValue, setCurrentPrize } =
-    usePrizeStore();
-  const { prizeList, currentPrize, temporaryPrize } = prizeConfig;
-  const { globalConfig } = useGlobalStore();
-  const { imageList } = globalConfig;
-  const { isMobile } = useSystemStore();
 
   // Methods
   const getPrizeListHeight = () => {
