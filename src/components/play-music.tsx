@@ -100,10 +100,10 @@ export function PlayMusic() {
       )}
 
       <div
-        className="tooltip tooltip-left"
+        className="tooltip tooltip-left before:whitespace-pre-wrap before:content-[attr(data-tip)]"
         data-tip={
           currentMusic.item
-            ? `${currentMusic.item.name}\n\r &nbsp; Right click next song`
+            ? `${currentMusic.item.name}\n Right click to play next song`
             : "No music to play"
         }
       >

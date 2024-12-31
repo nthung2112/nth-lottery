@@ -9,7 +9,7 @@ import PersonAlready from "@/pages/config/person/person-already";
 
 import PrizeConfig from "@/pages/config/prize/prize";
 
-import FaceConfig from "@/pages/config/global/face";
+import FaceConfig from "@/pages/config/global/interface";
 import ImageConfig from "@/pages/config/global/image";
 import MusicConfig from "@/pages/config/global/music";
 
@@ -63,7 +63,7 @@ export const configRoutes: any = {
           path: "face",
           Component: FaceConfig,
           meta: {
-            title: "Interface config",
+            title: "Interface",
             icon: "face",
           },
         },

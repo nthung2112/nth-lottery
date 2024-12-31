@@ -1,8 +1,12 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { CircleArrowUp } from "lucide-react";
 import { ToastContainer } from "react-toastify";
+import { themeChange } from "theme-change";
+
+import { useGlobalStore } from "@/store/global";
+
 import { PlayMusic } from "./play-music";
+import { SvgIcon } from "./svg-icon";
 
 const useScroll = (ref: React.RefObject<HTMLElement | null>) => {
   const [y, setY] = useState(0);
@@ -25,11 +29,16 @@ const useScroll = (ref: React.RefObject<HTMLElement | null>) => {
 export function Layout() {
   const mainContainer = useRef<HTMLElement>(null);
   const { y, setY } = useScroll(mainContainer);
+  const { globalConfig } = useGlobalStore();
 
   const scrollToTop = () => {
     setY(0);
     mainContainer.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    themeChange(globalConfig.theme as any);
+  }, []);
 
   return (
     <div className="w-screen h-screen">
@@ -38,7 +47,7 @@ export function Layout() {
           className="fixed z-50 flex items-center justify-center w-10 h-10 rounded-full shadow-lg cursor-pointer right-12 bottom-12 bg-slate-700 hover:bg-slate-600"
           onClick={scrollToTop}
         >
-          <CircleArrowUp />
+          <SvgIcon name="CircleArrowUp" />
         </div>
       )}
       <main
