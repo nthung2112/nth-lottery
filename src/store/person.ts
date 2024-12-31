@@ -136,10 +136,10 @@ export const getNotThisPrizePersonList = (personConfig: PersonConfigState) => {
   );
 };
 
-export const getAlreadyPersonList = (state: PersonState) =>
-  state.personConfig.allPersonList.filter((item) => item.isWin === true);
+export const getAlreadyPersonList = (personConfig: PersonConfigState) =>
+  personConfig.allPersonList.filter((item) => item.isWin === true);
 
 export const getNotPersonList = (personConfig: PersonConfigState) =>
   personConfig.allPersonList.filter((item) => item.isWin === false);
 
-export const getAlreadyPersonDetail = (state: PersonState) => state.personConfig.alreadyPersonList;
+export const getAlreadyPersonDetail = (personConfig: PersonConfigState) => personConfig.alreadyPersonList;
