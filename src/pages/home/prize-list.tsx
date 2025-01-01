@@ -59,6 +59,7 @@ export function PrizeList() {
       isShow: true,
       id: Date.now().toString(),
     };
+    setTemporaryPrizeValue(newTemporaryPrize);
     setCurrentPrize(newTemporaryPrize);
   };
 
@@ -295,17 +296,17 @@ export function PrizeList() {
                 />
               </div>
               <div className="flex flex-col gap-1 mr-2">
-                <div className="tooltip tooltip-left" data-tip="编辑">
+                <div className="tooltip tooltip-left" data-tip="Edit">
                   <div className="cursor-pointer hover:text-blue-400" onClick={addTemporaryPrize}>
                     <SvgIcon name="Pencil" />
                   </div>
                 </div>
-                <div className="tooltip tooltip-left" data-tip="删除">
+                <div className="tooltip tooltip-left" data-tip="Delete">
                   <div
                     className="cursor-pointer hover:text-blue-400"
                     onClick={deleteTemporaryPrize}
                   >
-                    <SvgIcon name="Delete" />
+                    <SvgIcon name="Trash" />
                   </div>
                 </div>
               </div>
