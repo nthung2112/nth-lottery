@@ -23,7 +23,6 @@ export function PrizeList() {
 
   // States
   const [prizeShow, setPrizeShow] = useState(isSHowPrizeList);
-  const [selectedPrize, setSelectedPrize] = useState<IPrizeConfig | null>(null);
 
   // Refs
   const prizeListRef = useRef<HTMLUListElement>(null);
@@ -83,20 +82,17 @@ export function PrizeList() {
       };
     }
 
-    setSelectedPrize(newSelectedPrize);
+    setTemporaryPrizeValue(newSelectedPrize);
   };
 
   const submitData = (value: any) => {
-    if (selectedPrize) {
-      setSelectedPrize({
-        ...selectedPrize,
-        separateCount: {
-          ...selectedPrize.separateCount,
-          countList: value,
-        },
-      });
-    }
-    setSelectedPrize(null);
+    setTemporaryPrizeValue({
+      ...temporaryPrize,
+      separateCount: {
+        ...temporaryPrize.separateCount,
+        countList: value,
+      },
+    });
   };
 
   // const changePersonCount = () => {
@@ -207,7 +203,7 @@ export function PrizeList() {
                         >
                           <div
                             className="flex items-center justify-center w-full h-full tooltip"
-                            data-tip={`已抽取:${se.isUsedCount}/${se.count}`}
+                            data-tip={`Extracted:${se.isUsedCount}/${se.count}`}
                           >
                             <div
                               className="absolute left-0 z-50 h-full bg-blue-300/80"
@@ -256,10 +252,10 @@ export function PrizeList() {
         </div>
       </dialog>
 
-      {selectedPrize?.count && (
+      {temporaryPrize.count && (
         <NumberSeparate
-          totalNumber={selectedPrize?.count!}
-          separatedNumber={selectedPrize?.separateCount.countList!}
+          totalNumber={temporaryPrize?.count!}
+          separatedNumber={temporaryPrize?.separateCount.countList!}
           onSubmitData={submitData}
         />
       )}
