@@ -32,10 +32,9 @@ export function NumberSeparate({
         const newList = [...prevList];
         newList.splice(index, 1);
         return newList;
-      } else {
-        const newList = [...prevList, item].sort((a, b) => a - b);
-        return newList;
       }
+
+      return [...prevList, item].sort((a, b) => a - b);
     });
   };
 
@@ -83,7 +82,7 @@ export function NumberSeparate({
   }, []);
 
   return (
-    <dialog id="my_modal_1" ref={dialogRef} className="z-50 overflow-hidden border-none modal">
+    <dialog ref={dialogRef} className="z-50 overflow-hidden border-none modal">
       <div className="overflow-hidden modal-box">
         <h3 className="pb-6 text-lg font-bold">Suggest!</h3>
         <p className="pb-8">Only 10 digits can be drawn in a single draw</p>

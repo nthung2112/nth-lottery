@@ -133,7 +133,7 @@ export default function FaceConfig() {
               <button className="btn" onClick={() => resetDataDialogRef.current?.close()}>
                 Cancel
               </button>
-              <button className="btn" onClick={resetData}>
+              <button className="btn btn-success" onClick={resetData}>
                 OK
               </button>
             </div>

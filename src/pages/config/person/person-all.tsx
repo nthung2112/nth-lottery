@@ -117,7 +117,7 @@ export default function PersonAll() {
 
   return (
     <div className="min-w-1000px">
-      <dialog id="my_modal_1" ref={resetDataDialogRef} className="border-none modal">
+      <dialog ref={resetDataDialogRef} className="border-none modal">
         <div className="modal-box">
           <h3 className="text-lg font-bold">Are you sure?</h3>
           <p className="py-4">
@@ -129,7 +129,7 @@ export default function PersonAll() {
               <button className="btn" onClick={() => resetDataDialogRef.current?.close()}>
                 Cancel
               </button>
-              <button className="btn" onClick={resetData}>
+              <button className="btn btn-success" onClick={resetData}>
                 OK
               </button>
             </div>
@@ -137,7 +137,7 @@ export default function PersonAll() {
         </div>
       </dialog>
 
-      <dialog id="my_modal_1" ref={delAllDataDialogRef} className="border-none modal">
+      <dialog ref={delAllDataDialogRef} className="border-none modal">
         <div className="modal-box">
           <h3 className="text-lg font-bold">Are you sure?</h3>
           <p className="py-4">This operation will delete all personnel data. Do you want to continue?</p>
@@ -146,7 +146,7 @@ export default function PersonAll() {
               <button className="btn" onClick={() => delAllDataDialogRef.current?.close()}>
                 Cancel
               </button>
-              <button className="btn" onClick={deleteAll}>
+              <button className="btn btn-success" onClick={deleteAll}>
                 OK
               </button>
             </div>

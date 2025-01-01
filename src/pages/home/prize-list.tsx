@@ -134,7 +134,7 @@ export function PrizeList() {
   return (
     <div className="flex items-center">
       {/* Dialog */}
-      <dialog id="my_modal_1" ref={temporaryPrizeRef} className="border-none modal">
+      <dialog ref={temporaryPrizeRef} className="border-none modal">
         <div className="modal-box">
           <h3 className="text-lg font-bold">Add temporary lottery</h3>
           <div className="flex flex-col gap-3">
@@ -247,8 +247,8 @@ export function PrizeList() {
 
           <div className="modal-action">
             <form method="dialog" className="flex gap-3">
-              <button className="btn btn-sm" onClick={submitTemporaryPrize}>
-                Are you sure
+              <button className="btn btn-sm btn-success" onClick={submitTemporaryPrize}>
+                OK
               </button>
               <button className="btn btn-sm">Cancel</button>
             </form>
