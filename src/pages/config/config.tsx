@@ -102,7 +102,7 @@ export default function ConfigPage() {
         <nav className="p-4">
           <div className="grid grid-flow-col gap-4">
             <a
-              href="https://github.com/LOG1997/log-lottery"
+              href="https://github.com/nthung2112/nth-lottery"
               target="_blank"
               className="cursor-pointer text-inherit"
             >
@@ -112,7 +112,7 @@ export default function ConfigPage() {
               <SvgIcon name="Twitter" />
             </a>
             <a
-              href="https://www.instagram.com/log.z1997/"
+              href="https://www.instagram.com/nthung2112/"
               target="_blank"
               className="cursor-pointer"
             >

@@ -64,7 +64,7 @@ const initialState = {
   globalConfig: {
     rowCount: 17,
     isSHowPrizeList: true,
-    topTitle: "NTH Lucky Draw",
+    topTitle: "NTH Lottery",
     theme: {
       name: "dracula",
       detail: { primary: "#0f5fd3" },
