@@ -48,7 +48,6 @@ export default function FaceConfig() {
   const [isRowCountChange, setIsRowCountChange] = useState<0 | 1 | 2>(0);
   const [themeValue, setThemeValue] = useState(globalConfig.theme.name);
   const [rowCountValue, setRowCountValue] = useState(globalConfig.rowCount);
-  const [formError, setFormError] = useState({ rowCount: "" });
 
   const themeList = Object.keys(daisyuiThemes);
   const daisyuiThemeList = daisyuiThemes;
@@ -65,9 +64,8 @@ export default function FaceConfig() {
         await schema.parseAsync({ rowCount: rowCountValue });
         setIsRowCountChange(1);
         setRowCount(rowCountValue);
-        setFormError({ rowCount: "" });
       } catch (err: any) {
-        setFormError({ rowCount: err.errors[0].message });
+        console.error(err.errors);
       }
     };
     validateRowCount();

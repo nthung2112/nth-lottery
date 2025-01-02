@@ -11,8 +11,6 @@ export default function PrizeConfig() {
 
   const [prizeList, setPrizeList] = useState<IPrizeConfig[]>(prizeConfig.prizeList);
   const [selectedPrize, setSelectedPrize] = useState<IPrizeConfig | null>(null);
-  const [currentPrize, setCurrentPrize] = useState<IPrizeConfig | null>(null);
-  const [localImageList, setLocalImageList] = useState<any[]>(globalConfig.imageList);
 
   const addPrize = () => {
     const defaultPrizeConfig: IPrizeConfig = {
@@ -141,7 +139,7 @@ export default function PrizeConfig() {
           <li
             key={item.id}
             className={`flex gap-10 ${
-              currentPrize?.id === item.id ? "border-1 border-dotted rounded-xl" : ""
+              prizeConfig.currentPrize?.id === item.id ? "border-1 border-dotted rounded-xl" : ""
             }`}
           >
             <label className="max-w-xs mb-10 form-control">
@@ -246,7 +244,7 @@ export default function PrizeConfig() {
                   const newList = [...prizeList];
                   const prize = newList.find((p) => p.id === item.id);
                   if (prize) {
-                    prize.picture = localImageList.find((img) => img.id === e.target.value) || {
+                    prize.picture = globalConfig.imageList.find((img) => img.id === e.target.value) || {
                       id: "",
                       name: "",
                       url: "",
@@ -257,7 +255,7 @@ export default function PrizeConfig() {
               >
                 {item.picture.id && <option value="">❌</option>}
                 <option disabled>Choose a picture</option>
-                {localImageList.map((pic) => (
+                {globalConfig.imageList.map((pic) => (
                   <option key={pic.id} value={pic.id}>
                     {pic.name}
                   </option>
@@ -321,7 +319,7 @@ export default function PrizeConfig() {
         <NumberSeparate
           totalNumber={selectedPrize.count}
           separatedNumber={selectedPrize.separateCount.countList}
-          onSubmitData={(value) => {
+          onSubmitData={() => {
             setSelectedPrize(null);
           }}
         />

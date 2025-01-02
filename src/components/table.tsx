@@ -35,7 +35,7 @@ export function Table({ data = [], tableColumns = [] }: TableProps) {
             {dataColumns.map((item, index) => (
               <th key={index}>{item.label}</th>
             ))}
-            {actionsColumns.map((item, index) => (
+            {actionsColumns.map((_item, index) => (
               <th key={index}>Operate</th>
             ))}
             <th></th>

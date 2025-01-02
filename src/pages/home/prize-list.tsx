@@ -136,7 +136,7 @@ export function PrizeList() {
           <h3 className="text-lg font-bold">Add temporary lottery</h3>
           <div className="flex flex-col gap-3">
             <label className="flex w-full max-w-xs">
-              <div className="label">
+              <div className="label w-36">
                 <span className="label-text">Name:</span>
               </div>
               <input
@@ -149,7 +149,7 @@ export function PrizeList() {
             </label>
 
             <label className="flex w-full max-w-xs">
-              <div className="label">
+              <div className="label w-36">
                 <span className="label-text">Whether all members participate</span>
               </div>
               <input
@@ -161,7 +161,7 @@ export function PrizeList() {
             </label>
 
             <label className="flex w-full max-w-xs">
-              <div className="label">
+              <div className="label w-36">
                 <span className="label-text">Number of winners</span>
               </div>
               <input
@@ -174,7 +174,7 @@ export function PrizeList() {
             </label>
 
             <label className="flex w-full max-w-xs">
-              <div className="label">
+              <div className="label w-36">
                 <span className="label-text">Number of winners used</span>
               </div>
               <input
@@ -188,7 +188,7 @@ export function PrizeList() {
 
             {temporaryPrize.separateCount && (
               <label className="flex w-full max-w-xs">
-                <div className="label">
+                <div className="label w-36">
                   <span className="label-text">The number of single draws</span>
                 </div>
                 <div
@@ -223,7 +223,7 @@ export function PrizeList() {
             )}
 
             <label className="flex w-full max-w-xs">
-              <div className="label">
+              <div className="label w-36">
                 <span className="label-text">Image</span>
               </div>
               <select
