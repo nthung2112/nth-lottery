@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useImperativeHandle } from "react";
 
 interface Separate {
   id: string;
@@ -10,12 +10,19 @@ interface NumberSeparateProps {
   totalNumber: number;
   separatedNumber: Separate[];
   onSubmitData: (data: Separate[]) => void;
+  ref: React.RefObject<NumberSeparateRef | null>;
+}
+
+export interface NumberSeparateRef {
+  showModal: () => void;
+  closeModal: () => void;
 }
 
 export function NumberSeparate({
   totalNumber,
   separatedNumber,
   onSubmitData,
+  ref,
 }: NumberSeparateProps) {
   const [scaleList, setScaleList] = useState<number[]>([]);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -43,6 +50,17 @@ export function NumberSeparate({
     dialogRef.current?.close();
   };
 
+  useImperativeHandle(ref, () => {
+    return {
+      showModal() {
+        dialogRef.current?.showModal();
+      },
+      closeModal() {
+        dialogRef.current?.close();
+      },
+    };
+  }, []);
+
   useEffect(() => {
     const newSeparatedNumber: Separate[] = [];
     for (let i = 1; i < scaleList.length; i++) {
@@ -59,7 +77,6 @@ export function NumberSeparate({
     if (totalNumber <= 0) {
       return;
     }
-    dialogRef.current?.showModal();
 
     const initialScaleList = new Array(separatedNumber.length + 1).fill(totalNumber);
     for (let i = separatedNumber.length - 1; i >= 0; i--) {

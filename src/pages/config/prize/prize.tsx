@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { SvgIcon } from "@/components/svg-icon";
-import { NumberSeparate } from "@/components/number-separate";
+import { NumberSeparate, NumberSeparateRef } from "@/components/number-separate";
 import { IPrizeConfig } from "@/types/storeType";
 import { useGlobalStore } from "@/store/global";
 import { usePrizeStore } from "@/store/prize";
@@ -11,6 +11,7 @@ export default function PrizeConfig() {
 
   const [prizeList, setPrizeList] = useState<IPrizeConfig[]>(prizeConfig.prizeList);
   const [selectedPrize, setSelectedPrize] = useState<IPrizeConfig | null>(null);
+  const numberSeparateRef = useRef<NumberSeparateRef>(null);
 
   const addPrize = () => {
     const defaultPrizeConfig: IPrizeConfig = {
@@ -44,6 +45,7 @@ export default function PrizeConfig() {
 
     if (newItem.separateCount.countList.length > 1) {
       setSelectedPrize(newItem);
+      numberSeparateRef.current?.showModal();
       return;
     }
 
@@ -58,6 +60,7 @@ export default function PrizeConfig() {
       ],
     };
     setSelectedPrize(newItem);
+    numberSeparateRef.current?.showModal();
   };
 
   const changePrizeStatus = (item: IPrizeConfig) => {
@@ -317,6 +320,7 @@ export default function PrizeConfig() {
 
       {selectedPrize && (
         <NumberSeparate
+          ref={numberSeparateRef}
           totalNumber={selectedPrize.count}
           separatedNumber={selectedPrize.separateCount.countList}
           onSubmitData={() => {

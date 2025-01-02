@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { ImageSync } from "@/components/image-sync";
-import { NumberSeparate } from "@/components/number-separate";
+import { NumberSeparate, NumberSeparateRef } from "@/components/number-separate";
 import { SvgIcon } from "@/components/svg-icon";
 import { useGlobalStore } from "@/store/global";
 import { usePrizeStore } from "@/store/prize";
@@ -28,6 +28,7 @@ export function PrizeList() {
   const prizeListRef = useRef<HTMLUListElement>(null);
   const prizeListContainerRef = useRef<HTMLDivElement>(null);
   const temporaryPrizeRef = useRef<HTMLDialogElement>(null);
+  const numberSeparateRef = useRef<NumberSeparateRef>(null);
 
   // Methods
   const getPrizeListHeight = () => {
@@ -84,6 +85,7 @@ export function PrizeList() {
     }
 
     setTemporaryPrizeValue(newSelectedPrize);
+    numberSeparateRef.current?.showModal();
   };
 
   const submitData = (value: any) => {
@@ -133,7 +135,7 @@ export function PrizeList() {
       {/* Dialog */}
       <dialog ref={temporaryPrizeRef} className="border-none modal">
         <div className="modal-box">
-          <h3 className="text-lg font-bold">Add temporary lottery</h3>
+          <h3 className="text-lg font-bold py-6">Add temporary lottery</h3>
           <div className="flex flex-col gap-3">
             <label className="flex w-full max-w-xs">
               <div className="label w-36">
@@ -258,6 +260,7 @@ export function PrizeList() {
           totalNumber={temporaryPrize?.count!}
           separatedNumber={temporaryPrize?.separateCount.countList!}
           onSubmitData={submitData}
+          ref={numberSeparateRef}
         />
       )}
 
