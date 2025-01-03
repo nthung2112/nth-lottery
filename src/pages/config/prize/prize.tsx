@@ -16,7 +16,7 @@ export default function PrizeConfig() {
   const addPrize = () => {
     const defaultPrizeConfig: IPrizeConfig = {
       id: new Date().getTime().toString(),
-      name: "奖项",
+      name: "Awards",
       sort: 0,
       isAll: false,
       count: 1,
@@ -177,7 +177,7 @@ export default function PrizeConfig() {
                   if (prize) prize.name = e.target.value;
                   setPrizeList(newList);
                 }}
-                placeholder="名称"
+                placeholder="Name"
                 className="w-full max-w-xs input-sm input input-bordered"
               />
             </label>
@@ -213,12 +213,12 @@ export default function PrizeConfig() {
                   setPrizeList(newList);
                   changePrizePerson(item);
                 }}
-                placeholder="获奖人数"
+                placeholder="Number of winners"
                 className="w-full max-w-xs p-0 m-0 input-sm input input-bordered"
               />
               <div
                 className="tooltip tooltip-bottom"
-                data-tip={`已抽取:${item.isUsedCount}/${item.count}`}
+                data-tip={`Extracted:${item.isUsedCount}/${item.count}`}
               >
                 <progress className="w-full progress" value={item.isUsedCount} max={item.count} />
               </div>
@@ -281,7 +281,7 @@ export default function PrizeConfig() {
                         >
                           <div
                             className="flex items-center justify-center w-full h-full tooltip"
-                            data-tip={`已抽取:${se.isUsedCount}/${se.count}`}
+                            data-tip={`Extracted:${se.isUsedCount}/${se.count}`}
                           >
                             <div
                               className="absolute left-0 z-50 h-full bg-blue-300/80"

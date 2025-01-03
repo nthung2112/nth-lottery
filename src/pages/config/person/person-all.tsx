@@ -164,20 +164,20 @@ export default function PersonAll() {
         </button>
         <div
           className="tooltip tooltip-bottom"
-          data-tip="下载文件后，请在excel中填写数据，并保存为xlsx格式"
+          data-tip="After downloading the file, please fill in the data in excel and save it in xlsx format"
         >
           <a
             className="no-underline btn btn-secondary btn-sm"
-            download="人口登记表.xlsx"
+            download="form.xlsx"
             target="_blank"
-            href="/log-lottery/人口登记表.xlsx"
+            href="/log-lottery/form.xlsx"
           >
             Download template
           </a>
         </div>
         <div>
           <label htmlFor="explore">
-            <div className="tooltip tooltip-bottom" data-tip="上传修改好的excel文件">
+            <div className="tooltip tooltip-bottom" data-tip="Upload the modified excel file">
               <input
                 type="file"
                 id="explore"
