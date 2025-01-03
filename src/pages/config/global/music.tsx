@@ -88,7 +88,7 @@ export default function MusicConfig() {
 
   return (
     <div>
-      <div className="flex gap-3">
+      <div className="flex gap-3 mb-4">
         <button className="btn btn-primary btn-sm" onClick={resetMusic}>
           Reset music list
         </button>
@@ -109,7 +109,7 @@ export default function MusicConfig() {
       <div>
         <ul className="p-0">
           {musicList.map((item) => (
-            <li key={item.id} className="flex items-center gap-6 pb-2 mb-3 divide-y">
+            <li key={item.id} className="flex items-center gap-6 pb-2 mb-3">
               <div className="mr-12 overflow-hidden w-72 whitespace-nowrap text-ellipsis">
                 <span>{item.name}</span>
               </div>

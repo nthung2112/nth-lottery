@@ -59,7 +59,7 @@ export default function PersonAlready() {
 
   return (
     <div className="overflow-y-auto">
-      <h2>Management of winners</h2>
+      <h2 className="text-3xl sm:text-4x pb-4">Management of winners</h2>
       <div className="flex items-center justify-start gap-10">
         <div>
           <span>Number of winners: </span>

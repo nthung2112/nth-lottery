@@ -154,7 +154,7 @@ export default function PersonAll() {
         </div>
       </dialog>
 
-      <h2>Personnel management</h2>
+      <h2 className="text-3xl sm:text-4x pb-4">Personnel management</h2>
       <div className="flex gap-3">
         <button
           className="btn btn-error btn-sm"

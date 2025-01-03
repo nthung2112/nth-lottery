@@ -94,7 +94,7 @@ export default function ConfigPage() {
             ))}
           </ul>
         </aside>
-        <div className="flex-1 p-4 overflow-y-auto max-w-full">
+        <div className="flex-1 px-4 py-8 overflow-y-auto max-w-full">
           <Outlet />
         </div>
       </div>

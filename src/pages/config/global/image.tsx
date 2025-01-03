@@ -71,7 +71,7 @@ export default function ImageConfig() {
 
   return (
     <div>
-      <div>
+      <div className="mb-4">
         <label htmlFor="explore">
           <input
             type="file"

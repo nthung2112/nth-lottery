@@ -20,6 +20,15 @@ export const configRoutes: any = {
   Component: Config,
   children: [
     {
+      path: "",
+      index: true,
+      Component: FaceConfig,
+      meta: {
+        title: "Config",
+        icon: "config",
+      }
+    },
+    {
       path: "person",
       meta: {
         title: "Person",
@@ -59,14 +68,6 @@ export const configRoutes: any = {
         icon: "global",
       },
       children: [
-        {
-          path: "face",
-          Component: FaceConfig,
-          meta: {
-            title: "Interface",
-            icon: "face",
-          },
-        },
         {
           path: "image",
           Component: ImageConfig,

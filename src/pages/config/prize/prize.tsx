@@ -107,7 +107,7 @@ export default function PrizeConfig() {
 
   return (
     <div>
-      <h2>Award configuration</h2>
+      <h2 className="text-3xl sm:text-4x pb-4">Award configuration</h2>
       <div className="flex w-full gap-3">
         <button className="btn btn-info btn-sm" onClick={addPrize}>
           Add to

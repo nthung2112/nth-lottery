@@ -140,8 +140,8 @@ export default function FaceConfig() {
       </dialog>
 
       <div>
-        <h2>Global configuration</h2>
-        <div className="mb-8">
+        <h2 className="text-3xl sm:text-4x pb-4">Global configuration</h2>
+        <div className="mb-4">
           <button
             className="btn btn-sm btn-primary"
             onClick={() => resetDataDialogRef.current?.showModal()}
