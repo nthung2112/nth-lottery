@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { ImageSync } from "@/components/image-sync";
 import { NumberSeparate, NumberSeparateRef } from "@/components/number-separate";
@@ -8,8 +8,6 @@ import { useGlobalStore } from "@/store/global";
 import { usePrizeStore } from "@/store/prize";
 import { useSystemStore } from "@/store/system";
 import { IPrizeConfig } from "@/types/storeType";
-
-import defaultPrizeImage from "../../assets/images/龙.png";
 
 import "./prize-list.css";
 
@@ -279,11 +277,7 @@ export function PrizeList() {
                 {temporaryPrize.picture.url ? (
                   <ImageSync imgItem={temporaryPrize.picture} />
                 ) : (
-                  <img
-                    src={defaultPrizeImage}
-                    alt="Prize"
-                    className="object-cover h-full rounded-xl"
-                  />
+                  <SvgIcon name="Trophy" />
                 )}
               </figure>
               <div className="items-center p-0 text-center card-body">
@@ -341,11 +335,7 @@ export function PrizeList() {
                           {item.picture.url ? (
                             <ImageSync imgItem={item.picture} />
                           ) : (
-                            <img
-                              src={defaultPrizeImage}
-                              alt="Prize"
-                              className="object-cover h-full rounded-xl"
-                            />
+                            <SvgIcon name="Trophy" />
                           )}
                         </figure>
                         <div className="items-center p-0 text-center card-body">
