@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 
 import { ImageSync } from "@/components/image-sync";
 import { NumberSeparate, NumberSeparateRef } from "@/components/number-separate";
@@ -13,6 +14,8 @@ import defaultPrizeImage from "../../assets/images/龙.png";
 import "./prize-list.css";
 
 export function PrizeList() {
+  const { t } = useTranslation();
+
   // Store
   const { prizeConfig, setTemporaryPrize, setTemporaryPrizeValue, setCurrentPrize } =
     usePrizeStore();
@@ -135,50 +138,50 @@ export function PrizeList() {
       {/* Dialog */}
       <dialog ref={temporaryPrizeRef} className="border-none modal">
         <div className="modal-box">
-          <h3 className="text-lg font-bold py-6">Add temporary lottery</h3>
+          <h3 className="text-lg font-bold py-6">{t("temporary.title")}</h3>
           <div className="flex flex-col gap-3">
-            <label className="flex w-full max-w-xs">
-              <div className="label w-36">
-                <span className="label-text">Name:</span>
-              </div>
+            <div className="flex w-full">
+              <label className="label w-48">
+                <span className="label-text">{t("temporary.name")}</span>
+              </label>
               <input
                 type="text"
                 value={temporaryPrize.name}
                 onChange={(e) => handleChange("name", e.target.value)}
-                placeholder="Input name"
+                placeholder={t("temporary.name")}
                 className="max-w-xs input-sm input input-bordered"
               />
-            </label>
+            </div>
 
-            <label className="flex w-full max-w-xs">
-              <div className="label w-36">
-                <span className="label-text">Whether all members participate</span>
-              </div>
+            <div className="flex w-full">
+              <label className="label w-48">
+                <span className="label-text">{t("temporary.allowAllMembersToJoin")}</span>
+              </label>
               <input
                 type="checkbox"
                 checked={temporaryPrize.isAll}
                 onChange={() => handleChange("isAll", !temporaryPrize.isAll)}
                 className="mt-2 border-solid checkbox checkbox-secondary border-1"
               />
-            </label>
+            </div>
 
-            <label className="flex w-full max-w-xs">
-              <div className="label w-36">
-                <span className="label-text">Number of winners</span>
-              </div>
+            <div className="flex w-full">
+              <label className="label w-48">
+                <span className="label-text">{t("temporary.numberOfWinners")}</span>
+              </label>
               <input
                 type="number"
                 value={temporaryPrize.count}
                 onChange={(e) => handleChange("count", parseInt(e.target.value))}
-                placeholder="Number of winners"
+                placeholder={t("temporary.numberOfWinners")}
                 className="max-w-xs input-sm input input-bordered"
               />
-            </label>
+            </div>
 
-            <label className="flex w-full max-w-xs">
-              <div className="label w-36">
+            <div className="flex w-full">
+              <label className="label w-48">
                 <span className="label-text">Number of winners used</span>
-              </div>
+              </label>
               <input
                 disabled
                 type="number"
@@ -186,13 +189,13 @@ export function PrizeList() {
                 placeholder="Number of winners"
                 className="max-w-xs input-sm input input-bordered"
               />
-            </label>
+            </div>
 
             {temporaryPrize.separateCount && (
-              <label className="flex w-full max-w-xs">
-                <div className="label w-36">
+              <div className="flex w-full">
+                <label className="label w-48">
                   <span className="label-text">The number of single draws</span>
-                </div>
+                </label>
                 <div
                   className="flex justify-start h-full"
                   onClick={() => selectPrize(temporaryPrize)}
@@ -221,13 +224,13 @@ export function PrizeList() {
                     <button className="btn btn-secondary btn-xs">Set up</button>
                   )}
                 </div>
-              </label>
+              </div>
             )}
 
-            <label className="flex w-full max-w-xs">
-              <div className="label w-36">
+            <div className="flex w-full">
+              <label className="label w-48">
                 <span className="label-text">Image</span>
-              </div>
+              </label>
               <select
                 className="flex-1 w-12 select select-warning select-sm"
                 value={temporaryPrize.picture.id}
@@ -241,7 +244,7 @@ export function PrizeList() {
                   </option>
                 ))}
               </select>
-            </label>
+            </div>
           </div>
 
           <div className="modal-action">

@@ -1,0 +1,8 @@
+{
+  "temporary": {
+    "title": "Add temporary lottery",
+    "name": "Prize name",
+    "allowAllMembersToJoin": "Allow all members to join",
+    "numberOfWinners": "Number of winners"
+  }
+}
