@@ -472,7 +472,7 @@ function Home() {
     setCurrentStatus(2);
     rollBall(10, 3000);
 
-    toast(`Draw now ${currentPrize.name} ${leftover} person`, {
+    toast(`Drawing lots ${currentPrize.name} for ${leftover} persons`, {
       position: "top-right",
       autoClose: 8000,
       hideProgressBar: true,
@@ -542,16 +542,14 @@ function Home() {
   const continueLottery = useCallback(async () => {
     if (!canOperate) return;
 
-    const customCount = currentPrize.separateCount;
-    let separateCount = currentPrize.separateCount;
-    if (customCount?.enable && customCount.countList.length > 0) {
-      const updatedCountList = customCount.countList.map((count) => {
-        if (count.isUsedCount < count.count) {
-          return { ...count, isUsedCount: count.isUsedCount + luckyCount };
+    const separateCount = structuredClone(currentPrize.separateCount);
+    if (separateCount?.enable && separateCount.countList.length > 0) {
+      for (const countItem of separateCount.countList) {
+        if (countItem.isUsedCount < countItem.count) {
+          countItem.isUsedCount += luckyCount;
+          break;
         }
-        return count;
-      });
-      separateCount = { ...currentPrize.separateCount, countList: updatedCountList };
+      }
     }
 
     const newCurrentPrize = {

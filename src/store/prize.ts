@@ -76,15 +76,23 @@ export const usePrizeStore = create<PrizeState>()(
 
       updatePrizeConfig: (prizeConfigItem) =>
         set((state) => {
-          if (prizeConfigItem.isUsed && state.prizeConfig.prizeList.length) {
-            const nextPrize = state.prizeConfig.prizeList.find(
-              (item) => !item.isUsed && item.id !== prizeConfigItem.id
-            );
-            if (nextPrize) {
-              state.prizeConfig.currentPrize = nextPrize;
-            }
+          if (state.prizeConfig.temporaryPrize.isShow) {
+            state.prizeConfig.temporaryPrize = prizeConfigItem;
           }
-          state.prizeConfig.temporaryPrize = initialTemporaryPrize;
+
+          if (!(prizeConfigItem.isUsed && state.prizeConfig.prizeList.length)) {
+            return;
+          }
+          const nextPrize = state.prizeConfig.prizeList.find(
+            (item) => !item.isUsed && item.id !== prizeConfigItem.id
+          );
+          if (nextPrize) {
+            state.prizeConfig.currentPrize = nextPrize;
+          }
+
+          if (state.prizeConfig.temporaryPrize.isShow) {
+            state.prizeConfig.temporaryPrize = initialTemporaryPrize;
+          }
         }),
 
       deleteAllPrizeConfig: () =>
