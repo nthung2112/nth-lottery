@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as TWEEN from "@tweenjs/tween.js";
-import { Object3D, PerspectiveCamera, Scene, Vector3 } from "three";
+import { PerspectiveCamera, Scene } from "three";
 import { CSS3DObject, CSS3DRenderer } from "three-css3d";
 import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 import { toast } from "react-toastify";
@@ -17,6 +17,15 @@ import { confettiFire, initTableData, selectCard } from "./home-util";
 import { PrizeList } from "./prize-list";
 
 import "./home.css";
+import {
+  createCardElement,
+  createHelixVertices,
+  createSphereVertices,
+  createTableVertices,
+  initializeControls,
+  initializeRenderer,
+  initializeScene,
+} from "./home-three";
 
 function Home() {
   const navigate = useNavigate();
@@ -64,141 +73,42 @@ function Home() {
     sphere: [] as any[],
   });
 
-  const createTableVertices = () => {
-    for (const tableItem of tableData) {
-      const object = new Object3D();
-      object.position.x =
-        tableItem.x * (globalConfig.theme.cardWidth + 40) - globalConfig.rowCount * 90;
-      object.position.y = -tableItem.y * (globalConfig.theme.cardHeight + 20) + 1000;
-      object.position.z = 0;
-      targets.current.table.push(object);
-    }
-  };
-
-  const createSphereVertices = () => {
-    const objLength = objectsRef.current.length;
-    const vector = new Vector3();
-
-    for (let i = 0; i < objLength; ++i) {
-      const phi = Math.acos(-1 + (2 * i) / objLength);
-      const theta = Math.sqrt(objLength * Math.PI) * phi;
-      const object = new Object3D();
-
-      object.position.x = 800 * Math.cos(theta) * Math.sin(phi);
-      object.position.y = 800 * Math.sin(theta) * Math.sin(phi);
-      object.position.z = -800 * Math.cos(phi);
-
-      vector.copy(object.position).multiplyScalar(2);
-      object.lookAt(vector);
-      targets.current.sphere.push(object);
-    }
-  };
-
-  const createHelixVertices = () => {
-    const vector = new Vector3();
-    const objLength = objectsRef.current.length;
-
-    for (let i = 0; i < objLength; ++i) {
-      const phi = i * 0.213 + Math.PI;
-      const object = new Object3D();
-
-      object.position.x = 800 * Math.sin(phi);
-      object.position.y = -(i * 8) + 450;
-      object.position.z = 800 * Math.cos(phi + Math.PI);
-      object.scale.set(1.1, 1.1, 1.1);
-
-      vector.x = object.position.x * 2;
-      vector.y = object.position.y;
-      vector.z = object.position.z * 2;
-
-      object.lookAt(vector);
-      targets.current.helix.push(object);
-    }
-  };
-
   // Three.js initialization
   const init = () => {
     if (!containerRef.current || sceneRef.current) return;
 
-    const fieldView = 40;
     const width = window.innerWidth;
     const height = window.innerHeight;
-    const aspect = width / height;
 
-    // Initialize scene
-    sceneRef.current = new Scene();
-    cameraRef.current = new PerspectiveCamera(fieldView, aspect, 1, 10000);
-    cameraRef.current.position.z = 3000;
+    const { scene, camera } = initializeScene(width, height);
+    const renderer = initializeRenderer(width, height);
 
-    // Initialize renderer
-    rendererRef.current = new CSS3DRenderer();
-    rendererRef.current.setSize(width, height * 0.9);
-    rendererRef.current.domElement.style.position = "absolute";
-    rendererRef.current.domElement.style.paddingTop = "50px";
-    rendererRef.current.domElement.style.top = "50%";
-    rendererRef.current.domElement.style.left = "50%";
-    rendererRef.current.domElement.style.transform = "translate(-50%, -50%)";
+    containerRef.current?.appendChild(renderer.domElement);
 
-    containerRef.current.appendChild(rendererRef.current.domElement);
+    const controls = initializeControls(camera, renderer, render);
 
-    // Initialize controls
-    if (cameraRef.current && rendererRef.current) {
-      controlsRef.current = new TrackballControls(
-        cameraRef.current,
-        rendererRef.current.domElement
-      );
-      controlsRef.current.rotateSpeed = 1;
-      controlsRef.current.staticMoving = true;
-      controlsRef.current.minDistance = 500;
-      controlsRef.current.maxDistance = 6000;
-      controlsRef.current.addEventListener("change", render);
-    }
+    sceneRef.current = scene;
+    cameraRef.current = camera;
+    rendererRef.current = renderer;
+    controlsRef.current = controls;
 
-    // Create objects
-    // Create elements
-    tableData.forEach((item, i) => {
-      const element = document.createElement("div");
-      element.className = "element-card";
-
-      const number = document.createElement("div");
-      number.className = "card-id";
-      number.textContent = item.uid;
-      element.appendChild(number);
-
-      const symbol = document.createElement("div");
-      symbol.className = "card-name";
-      symbol.textContent = item.name;
-      element.appendChild(symbol);
-
-      const detail = document.createElement("div");
-      detail.className = "card-detail";
-      detail.innerHTML = `${item.department}<br/>${item.identity}`;
-      element.appendChild(detail);
-
-      const styledElement = createElementStyle(
-        element,
-        item,
-        i,
-        patternList,
-        patternColor,
-        cardColor,
-        cardSize,
-        textSize
-      );
+    // Create and add objects
+    objectsRef.current = tableData.map((item, i) => {
+      const styledElement = createCardElement(item, i, globalConfig.theme);
       const object = new CSS3DObject(styledElement);
-      object.position.x = Math.random() * 4000 - 2000;
-      object.position.y = Math.random() * 4000 - 2000;
-      object.position.z = Math.random() * 4000 - 2000;
+      object.position.set(
+        Math.random() * 4000 - 2000,
+        Math.random() * 4000 - 2000,
+        Math.random() * 4000 - 2000
+      );
 
-      if (sceneRef.current) {
-        sceneRef.current.add(object);
-      }
-      objectsRef.current.push(object);
+      scene.add(object);
+      return object;
     });
 
-    createTableVertices();
-    createSphereVertices();
-    createHelixVertices();
+    targets.current.table = createTableVertices(tableData, globalConfig);
+    targets.current.sphere = createSphereVertices(objectsRef.current.length);
+    targets.current.helix = createHelixVertices(objectsRef.current.length);
 
     transform(targets.current.table, 1000);
     render();
