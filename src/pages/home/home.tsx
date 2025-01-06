@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as TWEEN from "@tweenjs/tween.js";
-import { PerspectiveCamera, Scene } from "three";
+import { Object3D, Object3DEventMap, PerspectiveCamera, Scene } from "three";
 import { CSS3DObject, CSS3DRenderer } from "three-css3d";
 import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 import { toast } from "react-toastify";
@@ -26,6 +26,7 @@ import {
   initializeRenderer,
   initializeScene,
 } from "./home-three";
+import { createPositionTween, createRotationTween, defaultAnimationConfig } from "./home-tween";
 
 function Home() {
   const navigate = useNavigate();
@@ -69,8 +70,8 @@ function Home() {
   const targets = useRef({
     grid: [] as any[],
     helix: [] as any[],
-    table: [] as any[],
-    sphere: [] as any[],
+    table: [] as Object3D<Object3DEventMap>[],
+    sphere: [] as Object3D<Object3DEventMap>[],
   });
 
   // Three.js initialization
@@ -114,7 +115,7 @@ function Home() {
     render();
   };
 
-  const transform = (targets: any[], duration: number): Promise<void> => {
+  const transform = (targets: Object3D<Object3DEventMap>[], duration: number): Promise<void> => {
     TWEEN.removeAll();
 
     if (intervalTimerRef.current) {
@@ -124,36 +125,13 @@ function Home() {
     }
 
     return new Promise((resolve) => {
-      const objLength = objectsRef.current.length;
+      const config = { ...defaultAnimationConfig, duration };
 
-      for (let i = 0; i < objLength; ++i) {
-        const object = objectsRef.current[i];
+      objectsRef.current.forEach((object, i) => {
         const target = targets[i];
 
-        // Position animation
-        new TWEEN.Tween(object.position)
-          .to(
-            {
-              x: target.position.x,
-              y: target.position.y,
-              z: target.position.z,
-            },
-            Math.random() * duration + duration
-          )
-          .easing(TWEEN.Easing.Exponential.InOut)
-          .start();
-
-        // Rotation animation
-        new TWEEN.Tween(object.rotation)
-          .to(
-            {
-              x: target.rotation.x,
-              y: target.rotation.y,
-              z: target.rotation.z,
-            },
-            Math.random() * duration + duration
-          )
-          .easing(TWEEN.Easing.Exponential.InOut)
+        createPositionTween(object, target.position, config).start();
+        createRotationTween(object, target.rotation, config)
           .start()
           .onComplete(() => {
             if (luckyCardList.length) {
@@ -176,7 +154,7 @@ function Home() {
             setLuckyCardList([]);
             setCanOperate(true);
           });
-      }
+      });
 
       // Synchronization tween
       new TWEEN.Tween({})
@@ -190,7 +168,6 @@ function Home() {
     });
   };
 
-  // // 旋转的动画
   function rollBall(rotateY: number, duration: number) {
     TWEEN.removeAll();
 
@@ -198,8 +175,7 @@ function Home() {
       sceneRef.current.rotation.y = 0;
     }
     const ballRotationY = Math.PI * rotateY * 1000;
-    const rotateObj = new TWEEN.Tween(sceneRef.current?.rotation!);
-    rotateObj
+    new TWEEN.Tween(sceneRef.current?.rotation!)
       .to(
         {
           x: 0,
