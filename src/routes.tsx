@@ -24,14 +24,14 @@ export const configRoutes: any = {
       index: true,
       Component: FaceConfig,
       meta: {
-        title: "Config",
+        title: "Global config",
         icon: "config",
-      }
+      },
     },
     {
       path: "person",
       meta: {
-        title: "Person",
+        title: "User config",
         icon: "person",
       },
       children: [
@@ -39,7 +39,7 @@ export const configRoutes: any = {
           path: "all",
           Component: PersonAll,
           meta: {
-            title: "Personnel list",
+            title: "Person list",
             icon: "all",
           },
         },
@@ -64,7 +64,7 @@ export const configRoutes: any = {
     {
       path: "global",
       meta: {
-        title: "Global config",
+        title: "Addition config",
         icon: "global",
       },
       children: [
@@ -90,7 +90,7 @@ export const configRoutes: any = {
       path: "readme",
       Component: Readme,
       meta: {
-        title: "Instruction",
+        title: "User Guide",
         icon: "readme",
       },
     },

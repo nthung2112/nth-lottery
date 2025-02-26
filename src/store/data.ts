@@ -546,17 +546,17 @@ export const defaultPersonList = <IPersonConfig[]>[
 export const defaultMusicList = [
   {
     id: "default.mp3" + new Date().getTime().toString(),
-    name: "Nhac Mac Dinh",
+    name: "Default Music",
     url: "/music/default.mp3",
   },
   {
     id: "xoso.mp3" + new Date().getTime().toString(),
-    name: "Nhac Xo So",
+    name: "Lottery Music",
     url: "/music/xoso.mp3",
   },
   {
     id: "xuan.mp3" + new Date().getTime().toString(),
-    name: "Nhac Xuan",
+    name: "Xuan Music",
     url: "/music/xuan.mp3",
   },
 ];

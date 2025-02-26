@@ -318,16 +318,16 @@ export default function FaceConfig() {
             />
           </div>
 
-          <div>
-            <label className="label">
-              <span className="label-text">Whether to always display the prize list</span>
-            </label>
+          <div className="flex gap-2">
             <input
               type="checkbox"
               checked={globalConfig.isSHowPrizeList}
               onChange={() => setIsShowPrizeList(!globalConfig.isSHowPrizeList)}
               className="mt-2 border-solid checkbox checkbox-secondary border-1"
             />
+            <label className="label">
+              <span className="label-text">Always display the prize list</span>
+            </label>
           </div>
 
           <div>
@@ -356,8 +356,6 @@ export default function FaceConfig() {
               />
             </div>
           </div>
-
-          
 
           <div className="flex gap-2">
             <button className="mt-5 btn btn-info btn-sm" onClick={clearPattern}>

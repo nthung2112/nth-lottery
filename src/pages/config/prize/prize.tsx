@@ -107,7 +107,7 @@ export default function PrizeConfig() {
 
   return (
     <div>
-      <h2 className="text-3xl sm:text-4x pb-4">Award configuration</h2>
+      <h2 className="text-3xl sm:text-4x pb-4">Prize configuration</h2>
       <div className="flex w-full gap-3">
         <button className="btn btn-info btn-sm" onClick={addPrize}>
           Add to
@@ -247,7 +247,9 @@ export default function PrizeConfig() {
                   const newList = [...prizeList];
                   const prize = newList.find((p) => p.id === item.id);
                   if (prize) {
-                    prize.picture = globalConfig.imageList.find((img) => img.id === e.target.value) || {
+                    prize.picture = globalConfig.imageList.find(
+                      (img) => img.id === e.target.value
+                    ) || {
                       id: "",
                       name: "",
                       url: "",
