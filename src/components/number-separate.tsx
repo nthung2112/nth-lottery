@@ -50,16 +50,20 @@ export function NumberSeparate({
     dialogRef.current?.close();
   };
 
-  useImperativeHandle(ref, () => {
-    return {
-      showModal() {
-        dialogRef.current?.showModal();
-      },
-      closeModal() {
-        dialogRef.current?.close();
-      },
-    };
-  }, []);
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        showModal() {
+          dialogRef.current?.showModal();
+        },
+        closeModal() {
+          dialogRef.current?.close();
+        },
+      };
+    },
+    []
+  );
 
   useEffect(() => {
     const newSeparatedNumber: Separate[] = [];

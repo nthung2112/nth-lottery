@@ -142,4 +142,5 @@ export const getAlreadyPersonList = (personConfig: PersonConfigState) =>
 export const getNotPersonList = (personConfig: PersonConfigState) =>
   personConfig.allPersonList.filter((item) => item.isWin === false);
 
-export const getAlreadyPersonDetail = (personConfig: PersonConfigState) => personConfig.alreadyPersonList;
+export const getAlreadyPersonDetail = (personConfig: PersonConfigState) =>
+  personConfig.alreadyPersonList;
