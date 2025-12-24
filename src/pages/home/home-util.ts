@@ -15,7 +15,7 @@ const filterData = (tableData: any[], localRowCount: number) => {
     tableData[i].x = (i % localRowCount) + 1;
     tableData[i].y = j;
     tableData[i].id = i;
-    // 是否中奖
+    // Whether to win
   }
 
   return tableData;

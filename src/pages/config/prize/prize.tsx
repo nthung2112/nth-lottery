@@ -7,7 +7,7 @@ import { usePrizeStore } from "@/store/prize";
 
 export default function PrizeConfig() {
   const { globalConfig } = useGlobalStore();
-  const { prizeConfig, resetDefault, deleteAllPrizeConfig, setPrizeList, updatePrizeConfig } =
+  const { prizeConfig, resetDefault, deleteAllPrizeConfig, setPrizeList } =
     usePrizeStore();
 
   const [selectedPrize, setSelectedPrize] = useState<IPrizeConfig | null>(null);

@@ -28,7 +28,7 @@ export function createElementStyle(
   } else {
     element.className = "element-card";
   }
-  // 等比放大
+  // Magnification
   element.addEventListener("mouseenter", (ev: MouseEvent) => {
     const target = ev.target as HTMLElement;
     target.style.border = `1px solid ${rgba(cardColor, 0.75)}`;
@@ -75,9 +75,9 @@ export function getElementPosition(
     x: 0,
     y: windowSize.height / 2 - cardSize.height / 2,
   };
-  // 有一行为偶数的特殊数量
+  // Special number of rows with even numbers
   const specialPosition = [2, 4, 7, 9];
-  // 不包含特殊值的 和 分两行中第一行为奇数值的
+  // Not including special values and the first row of the second row is an odd number
   if (!specialPosition.includes(totalCount) || (totalCount > 5 && cardIndex < 5)) {
     const index = cardIndex % 5;
     if (index == 0) {
