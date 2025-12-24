@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import localforage from "localforage";
 import { toast } from "react-toastify";
 import { ImageSync } from "@/components/image-sync";
@@ -9,14 +10,10 @@ const imageDbStore = localforage.createInstance({
   name: "imgStore",
 });
 
-const ToastMessage = {
-  SUCCESS: "Upload successful",
-  FAILED: "Upload failed",
-  NOTMATCH: "Not a picture",
-};
 const limitType = "image/*";
 
 export default function ImageConfig() {
+  const { t } = useTranslation();
   const { globalConfig, addImage, removeImage } = useGlobalStore();
   const { imageList } = globalConfig;
 
@@ -25,7 +22,7 @@ export default function ImageConfig() {
 
     const isImage = /image*/.test(e.target.files[0].type);
     if (!isImage) {
-      toast(ToastMessage.NOTMATCH);
+      toast(t("image.notAPicture"));
       return;
     }
 
@@ -37,10 +34,10 @@ export default function ImageConfig() {
 
       try {
         await imageDbStore.setItem(`${new Date().getTime().toString()}-${fileName}`, dataUrl);
-        toast(ToastMessage.SUCCESS);
+        toast(t("image.uploadSuccessful"));
         getImageDbStore();
       } catch {
-        toast(ToastMessage.FAILED);
+        toast(t("image.uploadFailed"));
       }
     };
     reader.readAsDataURL(file);
@@ -80,7 +77,7 @@ export default function ImageConfig() {
             onChange={handleFileChange}
             accept={limitType}
           />
-          <span className="btn btn-primary btn-sm">Upload image</span>
+          <span className="btn btn-primary btn-sm">{t("image.uploadImage")}</span>
         </label>
       </div>
       <ul className="menu p-0">
@@ -100,7 +97,7 @@ export default function ImageConfig() {
                 </div>
               </div>
               <button className="btn btn-error btn-xs" onClick={() => handleRemoveImage(item)}>
-                Delete
+                {t("image.delete")}
               </button>
             </div>
           </li>

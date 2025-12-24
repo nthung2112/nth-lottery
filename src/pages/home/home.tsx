@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import * as TWEEN from "@tweenjs/tween.js";
 import { Object3D, Object3DEventMap, PerspectiveCamera, Scene } from "three";
 import { CSS3DObject, CSS3DRenderer } from "three-css3d";
@@ -29,6 +30,7 @@ import {
 import { createPositionTween, createRotationTween, defaultAnimationConfig } from "./home-tween";
 
 function Home() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -309,7 +311,7 @@ function Home() {
     if (!canOperate) return;
 
     if (currentPrize?.isUsed || !currentPrize) {
-      toast("The lottery is over", {
+      toast(t("home.lotteryOver"), {
         position: "top-right",
         autoClose: 10000,
         hideProgressBar: true,
@@ -320,7 +322,7 @@ function Home() {
     const personPool = currentPrize.isAll ? notThisPrizePersonList : notPersonList;
 
     if (personPool.length < currentPrize.count - currentPrize.isUsedCount) {
-      toast("Not enough people in the lottery", {
+      toast(t("home.notEnoughPeople"), {
         position: "top-right",
         autoClose: 10000,
         hideProgressBar: true,
@@ -358,7 +360,7 @@ function Home() {
     setCurrentStatus(2);
     rollBall(10, 3000);
 
-    toast(`Drawing lots ${currentPrize.name} for ${leftover} persons`, {
+    toast(t("home.drawingLots", { prizeName: currentPrize.name, count: leftover }), {
       position: "top-right",
       autoClose: 8000,
       hideProgressBar: true,
@@ -532,13 +534,13 @@ function Home() {
                 className="cursor-pointer btn btn-outline btn-secondary btn-lg"
                 onClick={() => navigate("/config")}
               >
-                There is no personnel information, go to Import
+                {t("home.noPersonnel")}
               </button>
               <button
                 className="cursor-pointer btn btn-outline btn-secondary btn-lg"
                 onClick={setDefaultPersonList}
               >
-                Use default data
+                {t("home.useDefaultData")}
               </button>
             </>
           )}
@@ -556,14 +558,14 @@ function Home() {
         <div id="menu">
           {currentStatus === 0 && tableData.length > 0 && (
             <button className="btn-end" onClick={enterLottery}>
-              Enter the draw
+              {t("home.enterDraw")}
             </button>
           )}
 
           {currentStatus === 1 && (
             <div className="start">
               <button className="btn-start" onClick={startLottery}>
-                <strong className="strong-text">Start</strong>
+                <strong className="strong-text">{t("home.start")}</strong>
                 <div id="container-stars">
                   <div id="stars" />
                 </div>
@@ -577,7 +579,7 @@ function Home() {
 
           {currentStatus === 2 && (
             <button className="btn-end btn glass btn-lg" onClick={stopLottery}>
-              Draw the lucky one
+              {t("home.drawLucky")}
             </button>
           )}
 
@@ -585,7 +587,7 @@ function Home() {
             <div className="flex justify-center gap-6 enStop">
               <div className="start">
                 <button className="btn-start" onClick={continueLottery}>
-                  <strong className="strong-text">Continue!</strong>
+                  <strong className="strong-text">{t("home.continue")}</strong>
                   <div id="container-stars">
                     <div id="stars" />
                   </div>
@@ -598,7 +600,7 @@ function Home() {
 
               <div className="start">
                 <button className="btn-cancel" onClick={quitLottery}>
-                  <strong className="strong-text">Cancel</strong>
+                  <strong className="strong-text">{t("home.cancel")}</strong>
                   <div id="container-stars">
                     <div id="stars" />
                   </div>

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import localforage from "localforage";
 import { toast } from "react-toastify";
 
@@ -10,13 +11,8 @@ const audioDbStore = localforage.createInstance({
   name: "audioStore",
 });
 
-const ToastMessage = {
-  SUCCESS: "Upload success",
-  FAILED: "Upload failed",
-  NOTMATCH: "Not a audio file",
-};
-
 export default function MusicConfig() {
+  const { t } = useTranslation();
   const {
     globalConfig: { musicList },
     setCurrentMusic,
@@ -66,7 +62,7 @@ export default function MusicConfig() {
 
     const isAudio = /audio*/.test(e.target.files[0].type);
     if (!isAudio) {
-      toast(ToastMessage.NOTMATCH);
+      toast(t("music.notAudioFile"));
       return;
     }
 
@@ -74,11 +70,11 @@ export default function MusicConfig() {
     audioDbStore
       .setItem(`${new Date().getTime().toString()}-${fileName}`, dataUrl)
       .then(() => {
-        toast(ToastMessage.SUCCESS);
+        toast(t("music.uploadSuccess"));
         getMusicDbStore();
       })
       .catch(() => {
-        toast(ToastMessage.FAILED);
+        toast(t("music.uploadFailed"));
       });
   };
 
@@ -90,7 +86,7 @@ export default function MusicConfig() {
     <div>
       <div className="flex gap-3 mb-4">
         <button className="btn btn-primary btn-sm" onClick={resetMusic}>
-          Reset music list
+          {t("music.resetMusicList")}
         </button>
         <label htmlFor="explore">
           <input
@@ -100,10 +96,10 @@ export default function MusicConfig() {
             style={{ display: "none" }}
             onChange={handleFileChange}
           />
-          <span className="btn btn-primary btn-sm">Upload music</span>
+          <span className="btn btn-primary btn-sm">{t("music.uploadMusic")}</span>
         </label>
         <button className="btn btn-error btn-sm" onClick={deleteAll}>
-          Delete all
+          {t("music.deleteAll")}
         </button>
       </div>
       <div>
@@ -115,10 +111,10 @@ export default function MusicConfig() {
               </div>
               <div className="flex gap-3">
                 <button className="btn btn-primary btn-xs" onClick={() => play(item)}>
-                  Play
+                  {t("music.play")}
                 </button>
                 <button className="btn btn-error btn-xs" onClick={() => deleteMusic(item)}>
-                  Delete
+                  {t("music.delete")}
                 </button>
               </div>
             </li>

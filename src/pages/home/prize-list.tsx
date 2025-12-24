@@ -52,7 +52,7 @@ export function PrizeList() {
 
   const submitTemporaryPrize = () => {
     if (!temporaryPrize.name || !temporaryPrize.count) {
-      alert("Please fill in complete information");
+      alert(t("prize.fillCompleteInfo"));
       return;
     }
 
@@ -178,13 +178,13 @@ export function PrizeList() {
 
             <div className="flex w-full">
               <label className="label w-48">
-                <span className="label-text">Number of winners used</span>
+                <span className="label-text">{t("prize.numberOfWinnersUsed")}</span>
               </label>
               <input
                 disabled
                 type="number"
                 value={temporaryPrize.isUsedCount}
-                placeholder="Number of winners"
+                placeholder={t("prize.numberOfWinnersPlaceholder")}
                 className="max-w-xs input-sm input input-bordered"
               />
             </div>
@@ -192,7 +192,7 @@ export function PrizeList() {
             {temporaryPrize.separateCount && (
               <div className="flex w-full">
                 <label className="label w-48">
-                  <span className="label-text">The number of single draws</span>
+                  <span className="label-text">{t("prize.singleDrawCount")}</span>
                 </label>
                 <div
                   className="flex justify-start h-full"
@@ -207,7 +207,10 @@ export function PrizeList() {
                         >
                           <div
                             className="flex items-center justify-center w-full h-full tooltip"
-                            data-tip={`Extracted:${se.isUsedCount}/${se.count}`}
+                            data-tip={t("prize.extractedProgress", {
+                              used: se.isUsedCount,
+                              total: se.count,
+                            })}
                           >
                             <div
                               className="absolute left-0 z-50 h-full bg-blue-300/80"
@@ -219,7 +222,7 @@ export function PrizeList() {
                       ))}
                     </ul>
                   ) : (
-                    <button className="btn btn-secondary btn-xs">Set up</button>
+                    <button className="btn btn-secondary btn-xs">{t("prize.setup")}</button>
                   )}
                 </div>
               </div>
@@ -227,7 +230,7 @@ export function PrizeList() {
 
             <div className="flex w-full">
               <label className="label w-48">
-                <span className="label-text">Image</span>
+                <span className="label-text">{t("prize.image")}</span>
               </label>
               <select
                 className="flex-1 w-12 select select-warning select-sm"
@@ -235,7 +238,7 @@ export function PrizeList() {
                 onChange={(e) => handleChange("picture", e.target.value)}
               >
                 {temporaryPrize.picture.id && <option value="">❌</option>}
-                <option disabled>Choose a picture</option>
+                <option disabled>{t("prize.chooseImage")}</option>
                 {imageList.map((picItem) => (
                   <option key={picItem.id} value={picItem.id}>
                     {picItem.name}
@@ -248,9 +251,9 @@ export function PrizeList() {
           <div className="modal-action">
             <form method="dialog" className="flex gap-3">
               <button className="btn btn-sm btn-success" onClick={submitTemporaryPrize}>
-                OK
+                {t("common.ok")}
               </button>
-              <button className="btn btn-sm">Cancel</button>
+              <button className="btn btn-sm">{t("common.cancel")}</button>
             </form>
           </div>
         </div>
@@ -296,12 +299,12 @@ export function PrizeList() {
                 />
               </div>
               <div className="flex flex-col gap-1 mr-2">
-                <div className="tooltip tooltip-left" data-tip="Edit">
+                <div className="tooltip tooltip-left" data-tip={t("prize.edit")}>
                   <div className="cursor-pointer hover:text-blue-400" onClick={addTemporaryPrize}>
                     <SvgIcon name="Pencil" />
                   </div>
                 </div>
-                <div className="tooltip tooltip-left" data-tip="Delete">
+                <div className="tooltip tooltip-left" data-tip={t("prize.delete")}>
                   <div
                     className="cursor-pointer hover:text-blue-400"
                     onClick={deleteTemporaryPrize}
@@ -359,7 +362,7 @@ export function PrizeList() {
               )}
             </ul>
             <div className="flex flex-col gap-3">
-              <div className="tooltip tooltip-right" data-tip="Awards list">
+              <div className="tooltip tooltip-right" data-tip={t("prize.awardsList")}>
                 <div
                   className="flex items-center w-6 h-8 rounded-r-lg cursor-pointer prize-option bg-slate-500/50"
                   onClick={() => setPrizeShow(!prizeShow)}
@@ -367,7 +370,7 @@ export function PrizeList() {
                   <SvgIcon name="ChevronLeft" className="w-full h-full" />
                 </div>
               </div>
-              <div className="tooltip tooltip-right" data-tip="Add lottery">
+              <div className="tooltip tooltip-right" data-tip={t("prize.addLottery")}>
                 <div
                   className="flex items-center w-6 h-8 rounded-r-lg cursor-pointer prize-option bg-slate-500/50"
                   onClick={addTemporaryPrize}
@@ -382,7 +385,7 @@ export function PrizeList() {
 
       {/* Show/Hide toggle button */}
       {!prizeShow && (
-        <div className="tooltip tooltip-right" data-tip="Awards list">
+        <div className="tooltip tooltip-right" data-tip={t("prize.awardsList")}>
           <div
             className="flex items-center w-6 h-8 rounded-r-lg cursor-pointer prize-option bg-slate-500/50"
             onClick={() => setPrizeShow(true)}

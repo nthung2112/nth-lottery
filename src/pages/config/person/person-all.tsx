@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import * as XLSX from "xlsx";
 import { Table } from "@/components/table";
 import { IPersonConfig } from "@/types/storeType";
@@ -9,6 +10,7 @@ import { getAllPersonList, getAlreadyPersonList, usePersonStore } from "@/store/
 const limitType = ".xlsx,.xls";
 
 export default function PersonAll() {
+  const { t } = useTranslation();
   const {
     personConfig,
     resetPerson,
@@ -54,13 +56,13 @@ export default function PersonAll() {
     });
 
     const fieldMapping = {
-      uid: "ID",
-      isWin: "Is Winner",
-      department: "Department",
-      name: "Name",
-      identity: "Identity",
-      prizeName: "Prize Name",
-      prizeTime: "Prize Time",
+      uid: t("person.uid"),
+      isWin: t("person.haveWonPrize"),
+      department: t("person.department"),
+      name: t("person.name"),
+      identity: t("person.identity"),
+      prizeName: t("person.prize"),
+      prizeTime: t("person.timeOfWinning"),
     };
 
     const renamedData = data.map((item: any) => {
@@ -94,20 +96,20 @@ export default function PersonAll() {
   };
 
   const tableColumns = [
-    { label: "UID", props: "uid" },
-    { label: "Name", props: "name" },
-    { label: "Department", props: "department" },
-    { label: "Identity", props: "identity" },
+    { label: t("person.uid"), props: "uid" },
+    { label: t("person.name"), props: "name" },
+    { label: t("person.department"), props: "department" },
+    { label: t("person.identity"), props: "identity" },
     {
-      label: "Have you won the prize?",
+      label: t("person.haveWonPrize"),
       props: "isWin",
-      formatValue: (row: IPersonConfig) => (row.isWin ? "Yes" : "No"),
+      formatValue: (row: IPersonConfig) => (row.isWin ? t("person.yes") : t("person.no")),
     },
     {
-      label: "Operate",
+      label: t("person.operate"),
       actions: [
         {
-          label: "Delete",
+          label: t("person.delete"),
           type: "btn-error",
           onClick: delPersonItem,
         },
@@ -119,18 +121,15 @@ export default function PersonAll() {
     <div className="min-w-1000px">
       <dialog ref={resetDataDialogRef} className="border-none modal">
         <div className="modal-box">
-          <h3 className="text-lg font-bold">Are you sure?</h3>
-          <p className="py-4">
-            This operation will clear the winning information of the person. Do you want to
-            continue?
-          </p>
+          <h3 className="text-lg font-bold">{t("person.areYouSure")}</h3>
+          <p className="py-4">{t("person.clearWinningInfoConfirm")}</p>
           <div className="modal-action">
             <div className="flex gap-3">
               <button className="btn" onClick={() => resetDataDialogRef.current?.close()}>
-                Cancel
+                {t("common.cancel")}
               </button>
               <button className="btn btn-success" onClick={resetData}>
-                OK
+                {t("common.ok")}
               </button>
             </div>
           </div>
@@ -139,47 +138,42 @@ export default function PersonAll() {
 
       <dialog ref={delAllDataDialogRef} className="border-none modal">
         <div className="modal-box">
-          <h3 className="text-lg font-bold">Are you sure?</h3>
-          <p className="py-4">
-            This operation will delete all personnel data. Do you want to continue?
-          </p>
+          <h3 className="text-lg font-bold">{t("person.areYouSure")}</h3>
+          <p className="py-4">{t("person.deleteAllPersonnelConfirm")}</p>
           <div className="modal-action">
             <div className="flex gap-3">
               <button className="btn" onClick={() => delAllDataDialogRef.current?.close()}>
-                Cancel
+                {t("common.cancel")}
               </button>
               <button className="btn btn-success" onClick={deleteAll}>
-                OK
+                {t("common.ok")}
               </button>
             </div>
           </div>
         </div>
       </dialog>
 
-      <h2 className="text-3xl sm:text-4x pb-4">Personnel management</h2>
+      <h2 className="text-3xl sm:text-4x pb-4">{t("person.personnelManagement")}</h2>
       <div className="flex gap-3">
         <button
           className="btn btn-error btn-sm"
           onClick={() => delAllDataDialogRef.current?.showModal()}
         >
-          Delete all
+          {t("person.deleteAll")}
         </button>
-        <div
-          className="tooltip tooltip-bottom"
-          data-tip="After downloading the file, please fill in the data in excel and save it in xlsx format"
-        >
+        <div className="tooltip tooltip-bottom" data-tip={t("person.downloadTemplateTooltip")}>
           <a
             className="no-underline btn btn-secondary btn-sm"
             download="form.xlsx"
             target="_blank"
             href="/log-lottery/form.xlsx"
           >
-            Download template
+            {t("person.downloadTemplate")}
           </a>
         </div>
         <div>
           <label htmlFor="explore">
-            <div className="tooltip tooltip-bottom" data-tip="Upload the modified excel file">
+            <div className="tooltip tooltip-bottom" data-tip={t("person.uploadFileTooltip")}>
               <input
                 type="file"
                 id="explore"
@@ -187,7 +181,7 @@ export default function PersonAll() {
                 onChange={handleFileChange}
                 accept={limitType}
               />
-              <span className="btn btn-primary btn-sm">Import personnel data</span>
+              <span className="btn btn-primary btn-sm">{t("person.importPersonnelData")}</span>
             </div>
           </label>
         </div>
@@ -195,13 +189,13 @@ export default function PersonAll() {
           className="btn btn-error btn-sm"
           onClick={() => resetDataDialogRef.current?.showModal()}
         >
-          Reset personnel data
+          {t("person.resetPersonnelData")}
         </button>
         <button className="btn btn-accent btn-sm" onClick={exportData}>
-          Export results
+          {t("person.exportResults")}
         </button>
         <div>
-          <span>Number of winners: </span>
+          <span>{t("person.numberOfWinners")}: </span>
           <span>{alreadyPersonList.length}</span>
           <span>&nbsp;/&nbsp;</span>
           <span>{allPersonList.length}</span>
