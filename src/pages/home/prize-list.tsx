@@ -136,24 +136,24 @@ export function PrizeList() {
       {/* Dialog */}
       <dialog ref={temporaryPrizeRef} className="border-none modal">
         <div className="modal-box">
-          <h3 className="text-lg font-bold py-6">{t("temporary.title")}</h3>
+          <h3 className="text-lg font-bold py-6">{t("prize.title")}</h3>
           <div className="flex flex-col gap-3">
             <div className="flex w-full">
               <label className="label w-48">
-                <span className="label-text">{t("temporary.name")}</span>
+                <span className="label-text">{t("prize.name")}</span>
               </label>
               <input
                 type="text"
                 value={temporaryPrize.name}
                 onChange={(e) => handleChange("name", e.target.value)}
-                placeholder={t("temporary.name")}
+                placeholder={t("prize.name")}
                 className="max-w-xs input-sm input input-bordered"
               />
             </div>
 
             <div className="flex w-full">
               <label className="label w-48">
-                <span className="label-text">{t("temporary.allowAllMembersToJoin")}</span>
+                <span className="label-text">{t("prize.allowAllMembersToJoin")}</span>
               </label>
               <input
                 type="checkbox"
@@ -165,13 +165,13 @@ export function PrizeList() {
 
             <div className="flex w-full">
               <label className="label w-48">
-                <span className="label-text">{t("temporary.numberOfWinners")}</span>
+                <span className="label-text">{t("prize.numberOfWinners")}</span>
               </label>
               <input
                 type="number"
                 value={temporaryPrize.count}
                 onChange={(e) => handleChange("count", parseInt(e.target.value))}
-                placeholder={t("temporary.numberOfWinners")}
+                placeholder={t("prize.numberOfWinners")}
                 className="max-w-xs input-sm input input-bordered"
               />
             </div>

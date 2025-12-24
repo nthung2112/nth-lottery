@@ -1,8 +1,124 @@
 {
-  "temporary": {
-    "title": "Thêm xổ số tạm thời",
+  "common": {
+    "ok": "Đồng ý",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "add": "Thêm vào",
+    "save": "Lưu",
+    "reset": "Đặt lại",
+    "close": "Đóng",
+    "edit": "Chỉnh sửa",
+    "name": "Tên",
+    "order": "Thứ tự",
+    "operate": "Thao tác",
+    "attention": "Chú ý!",
+    "loading": "Đang tải..."
+  },
+  "language": {
+    "label": "Ngôn ngữ",
+    "english": "Tiếng Anh",
+    "vietnamese": "Tiếng Việt"
+  },
+  "navigation": {
+    "globalConfig": "Cấu hình chung",
+    "userConfig": "Cấu hình người dùng",
+    "personList": "Danh sách người chơi",
+    "winnerList": "Danh sách người thắng",
+    "prizeConfig": "Cấu hình giải thưởng",
+    "additionalConfig": "Cấu hình thêm",
+    "imageList": "Danh sách hình ảnh",
+    "musicList": "Danh sách nhạc",
+    "userGuide": "Hướng dẫn sử dụng"
+  },
+  "global": {
+    "title": "Cấu hình chung",
+    "resetAllData": "Đặt lại tất cả dữ liệu",
+    "resetDataConfirm": "Thao tác này sẽ đặt lại tất cả dữ liệu. Bạn có muốn tiếp tục không?",
+    "titleLabel": "Tiêu đề",
+    "titlePlaceholder": "Nhập tiêu đề",
+    "columnsLabel": "Số cột",
+    "columnsPlaceholder": "Nhập vào đây",
+    "resetLayout": "Đặt lại bố cục",
+    "resetLayoutTooltip": "Mục này tốn thời gian và hiệu suất cao",
+    "selectTheme": "Chọn chủ đề",
+    "selectThemePlaceholder": "Chọn chủ đề",
+    "selectBackground": "Chọn hình nền",
+    "selectBackgroundPlaceholder": "Chọn hình nền",
+    "none": "Không có",
+    "cardColor": "Màu thẻ",
+    "winningCardColor": "Màu thẻ trúng thưởng",
+    "textColor": "Màu chữ",
+    "cardWidth": "Chiều rộng thẻ",
+    "cardHeight": "Chiều cao thẻ",
+    "textSize": "Kích thước chữ",
+    "alwaysDisplayPrizeList": "Luôn hiển thị danh sách giải thưởng",
+    "patternColor": "Màu mẫu",
+    "patternSettings": "Cài đặt mẫu",
+    "clearPatternSettings": "Xóa cài đặt mẫu",
+    "defaultPatternSettings": "Cài đặt mẫu mặc định",
+    "defaultPatternTooltip": "Cài đặt mẫu mặc định có hiệu lực cho 17 cột. Vui lòng tự đặt số cột khác."
+  },
+  "prize": {
+    "title": "Cấu hình giải thưởng",
+    "addPrize": "Thêm vào",
+    "defaultList": "Danh sách mặc định",
+    "deleteAll": "Xóa tất cả",
+    "operationWarning": "Thực hiện thao tác có thể đặt lại dữ liệu, vui lòng thao tác cẩn thận",
     "name": "Tên giải thưởng",
-    "allowAllMembersToJoin": "Cho phép tất cả thành viên tham gia",
-    "numberOfWinners": "Só người chiến thắng"
+    "namePlaceholder": "Tên",
+    "allowAllMembersToJoin": "Tất cả thành viên tham gia",
+    "numberOfWinners": "Số người trong xổ số",
+    "numberOfWinnersPlaceholder": "Số người chiến thắng",
+    "extracted": "Đã trích xuất",
+    "extractedProgress": "Đã trích xuất:{{used}}/{{total}}",
+    "image": "Hình ảnh",
+    "chooseImage": "Chọn hình ảnh",
+    "singleDrawCount": "Số lần rút đơn",
+    "setup": "Thiết lập"
+  },
+  "person": {
+    "title": "Cấu hình người",
+    "allPersons": "Tất cả mọi người",
+    "alreadyDrawn": "Đã rút",
+    "notDrawn": "Chưa rút",
+    "importExcel": "Nhập Excel",
+    "exportExcel": "Xuất Excel",
+    "addPerson": "Thêm người",
+    "deletePerson": "Xóa người",
+    "clearAll": "Xóa tất cả"
+  },
+  "music": {
+    "title": "Cấu hình âm nhạc",
+    "addMusic": "Thêm nhạc",
+    "deleteAll": "Xóa tất cả",
+    "resetDefault": "Đặt lại mặc định",
+    "musicName": "Tên nhạc",
+    "musicUrl": "URL nhạc",
+    "play": "Phát",
+    "pause": "Tạm dừng"
+  },
+  "image": {
+    "title": "Cấu hình hình ảnh",
+    "addImage": "Thêm hình ảnh",
+    "deleteAll": "Xóa tất cả",
+    "resetDefault": "Đặt lại mặc định",
+    "imageName": "Tên hình ảnh",
+    "imageUrl": "URL hình ảnh",
+    "preview": "Xem trước"
+  },
+  "home": {
+    "title": "Xổ số NTH",
+    "startDraw": "Bắt đầu quay",
+    "stopDraw": "Dừng quay",
+    "noPrizes": "Chưa cấu hình giải thưởng",
+    "noPersons": "Không có người nào",
+    "winner": "Người chiến thắng",
+    "congratulations": "Chúc mừng!"
+  },
+  "validation": {
+    "required": "Trường này là bắt buộc",
+    "minValue": "Tối thiểu là {{min}}",
+    "maxValue": "Tối đa là {{max}}",
+    "invalidFormat": "Định dạng không hợp lệ"
   }
 }

@@ -24,14 +24,14 @@ export const configRoutes: any = {
       index: true,
       Component: FaceConfig,
       meta: {
-        title: "Global config",
+        titleKey: "navigation.globalConfig",
         icon: "config",
       },
     },
     {
       path: "person",
       meta: {
-        title: "User config",
+        titleKey: "navigation.userConfig",
         icon: "person",
       },
       children: [
@@ -39,7 +39,7 @@ export const configRoutes: any = {
           path: "all",
           Component: PersonAll,
           meta: {
-            title: "Person list",
+            titleKey: "navigation.personList",
             icon: "all",
           },
         },
@@ -47,7 +47,7 @@ export const configRoutes: any = {
           path: "already",
           Component: PersonAlready,
           meta: {
-            title: "Winner list",
+            titleKey: "navigation.winnerList",
             icon: "already",
           },
         },
@@ -57,14 +57,14 @@ export const configRoutes: any = {
       path: "prize",
       Component: PrizeConfig,
       meta: {
-        title: "Prize config",
+        titleKey: "navigation.prizeConfig",
         icon: "prize",
       },
     },
     {
       path: "global",
       meta: {
-        title: "Additional config",
+        titleKey: "navigation.additionalConfig",
         icon: "global",
       },
       children: [
@@ -72,7 +72,7 @@ export const configRoutes: any = {
           path: "image",
           Component: ImageConfig,
           meta: {
-            title: "Image list",
+            titleKey: "navigation.imageList",
             icon: "image",
           },
         },
@@ -80,7 +80,7 @@ export const configRoutes: any = {
           path: "music",
           Component: MusicConfig,
           meta: {
-            title: "Music list",
+            titleKey: "navigation.musicList",
             icon: "music",
           },
         },
@@ -90,7 +90,7 @@ export const configRoutes: any = {
       path: "readme",
       Component: Readme,
       meta: {
-        title: "User Guide",
+        titleKey: "navigation.userGuide",
         icon: "readme",
       },
     },

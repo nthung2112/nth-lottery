@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { SvgIcon } from "@/components/svg-icon";
 import { NumberSeparate, NumberSeparateRef } from "@/components/number-separate";
 import { IPrizeConfig } from "@/types/storeType";
@@ -6,9 +7,9 @@ import { useGlobalStore } from "@/store/global";
 import { usePrizeStore } from "@/store/prize";
 
 export default function PrizeConfig() {
+  const { t } = useTranslation();
   const { globalConfig } = useGlobalStore();
-  const { prizeConfig, resetDefault, deleteAllPrizeConfig, setPrizeList } =
-    usePrizeStore();
+  const { prizeConfig, resetDefault, deleteAllPrizeConfig, setPrizeList } = usePrizeStore();
 
   const [selectedPrize, setSelectedPrize] = useState<IPrizeConfig | null>(null);
   const numberSeparateRef = useRef<NumberSeparateRef>(null);
@@ -108,16 +109,16 @@ export default function PrizeConfig() {
 
   return (
     <div>
-      <h2 className="text-3xl sm:text-4x pb-4">Prize configuration</h2>
+      <h2 className="text-3xl sm:text-4x pb-4">{t("prize.title")}</h2>
       <div className="flex w-full gap-3">
         <button className="btn btn-info btn-sm" onClick={addPrize}>
-          Add to
+          {t("prize.addPrize")}
         </button>
         <button className="btn btn-info btn-sm" onClick={resetDefault}>
-          Default list
+          {t("prize.defaultList")}
         </button>
         <button className="btn btn-error btn-sm" onClick={deleteAllPrizeConfig}>
-          Delete all
+          {t("prize.deleteAll")}
         </button>
       </div>
 
@@ -135,20 +136,20 @@ export default function PrizeConfig() {
             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <span>Performing operations may reset data, please operate with caution</span>
+        <span>{t("prize.operationWarning")}</span>
       </div>
 
       <table className="table">
         <thead>
           <tr>
-            <th>Order</th>
-            <th>Name</th>
-            <th>All members participate</th>
-            <th>Number of people in the lottery</th>
-            <th>Extracted</th>
-            <th>Image</th>
-            <th>The number of single draws</th>
-            <th>Operate</th>
+            <th>{t("common.order")}</th>
+            <th>{t("common.name")}</th>
+            <th>{t("prize.allowAllMembersToJoin")}</th>
+            <th>{t("prize.numberOfWinners")}</th>
+            <th>{t("prize.extracted")}</th>
+            <th>{t("prize.image")}</th>
+            <th>{t("prize.singleDrawCount")}</th>
+            <th>{t("common.operate")}</th>
           </tr>
         </thead>
         <tbody>
@@ -182,7 +183,7 @@ export default function PrizeConfig() {
                       prizeList.map((p) => (p.id === item.id ? { ...p, name: e.target.value } : p))
                     );
                   }}
-                  placeholder="Name"
+                  placeholder={t("prize.namePlaceholder")}
                   className="w-full max-w-xs input-sm input input-bordered"
                 />
               </td>
@@ -212,12 +213,15 @@ export default function PrizeConfig() {
                     );
                     changePrizePerson(item);
                   }}
-                  placeholder="Number of winners"
+                  placeholder={t("prize.numberOfWinnersPlaceholder")}
                   className="w-full max-w-xs m-0 input-sm input input-bordered"
                 />
                 <div
                   className="tooltip tooltip-bottom"
-                  data-tip={`Extracted:${item.isUsedCount}/${item.count}`}
+                  data-tip={t("prize.extractedProgress", {
+                    used: item.isUsedCount,
+                    total: item.count,
+                  })}
                 >
                   <progress className="w-full progress" value={item.isUsedCount} max={item.count} />
                 </div>
@@ -256,7 +260,7 @@ export default function PrizeConfig() {
                   }}
                 >
                   {item.picture.id && <option value="">❌</option>}
-                  <option disabled>Choose a picture</option>
+                  <option disabled>{t("prize.chooseImage")}</option>
                   {globalConfig.imageList.map((pic) => (
                     <option key={pic.id} value={pic.id}>
                       {pic.name}
@@ -280,7 +284,10 @@ export default function PrizeConfig() {
                           >
                             <div
                               className="flex items-center justify-center w-full h-full tooltip"
-                              data-tip={`Extracted:${se.isUsedCount}/${se.count}`}
+                              data-tip={t("prize.extractedProgress", {
+                                used: se.isUsedCount,
+                                total: se.count,
+                              })}
                             >
                               <div
                                 className="absolute left-0 z-50 h-full bg-blue-300/80"
@@ -292,7 +299,7 @@ export default function PrizeConfig() {
                         ))}
                       </ul>
                     ) : (
-                      <button className="btn btn-secondary btn-xs">Set up</button>
+                      <button className="btn btn-secondary btn-xs">{t("prize.setup")}</button>
                     )}
                   </div>
                 </td>
@@ -306,7 +313,7 @@ export default function PrizeConfig() {
                       setPrizeList(prizeList.filter((p) => p.id !== item.id));
                     }}
                   >
-                    Delete
+                    {t("common.delete")}
                   </button>
                 </div>
               </td>

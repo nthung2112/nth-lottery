@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { SvgIcon } from "@/components/svg-icon";
 import { configRoutes } from "../../routes";
 
 export default function ConfigPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const [menuList, setMenuList] = useState<any[]>([]);
@@ -25,13 +27,13 @@ export default function ConfigPage() {
     if (item.children) {
       return (
         <details open key={item.path}>
-          <summary>{item.meta.title}</summary>
+          <summary>{t(item.meta.titleKey)}</summary>
           <ul>
             {item.children.map((subItem: any) => (
               <li key={subItem.path}>
                 {subItem.children ? (
                   <details open>
-                    <summary>{subItem.meta?.title}</summary>
+                    <summary>{t(subItem.meta?.titleKey)}</summary>
                     <ul>
                       {subItem.children.map((subSubItem: any) => (
                         <li key={subSubItem.path}>
@@ -46,7 +48,7 @@ export default function ConfigPage() {
                                   : undefined,
                             }}
                           >
-                            {subSubItem.meta?.title}
+                            {t(subSubItem.meta?.titleKey)}
                           </a>
                         </li>
                       ))}
@@ -61,7 +63,7 @@ export default function ConfigPage() {
                         subItem.name === location.pathname ? "rgba(12,12,12,0.2)" : undefined,
                     }}
                   >
-                    {subItem.meta?.title}
+                    {t(subItem.meta?.titleKey)}
                   </a>
                 )}
               </li>
@@ -79,7 +81,7 @@ export default function ConfigPage() {
           backgroundColor: item.name === location.pathname ? "rgba(12,12,12,0.2)" : undefined,
         }}
       >
-        {item.meta?.title}
+        {t(item.meta?.titleKey)}
       </a>
     );
   };
@@ -108,7 +110,7 @@ export default function ConfigPage() {
             >
               <SvgIcon name="Github" />
             </a>
-            <a href="https://twitter.com/TaborSwift" target="_blank" className="cursor-pointer">
+            <a href="https://twitter.com/nthung2112" target="_blank" className="cursor-pointer">
               <SvgIcon name="Twitter" />
             </a>
             <a

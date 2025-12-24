@@ -3,6 +3,7 @@ import { Theme } from "daisyui";
 import daisyuiThemes from "daisyui/src/theming/themes";
 import { themeChange } from "theme-change";
 import { z as zod } from "zod";
+import { useTranslation } from "react-i18next";
 
 import { useGlobalStore } from "@/store/global";
 import { getNotPersonList, usePersonStore } from "@/store/person";
@@ -12,6 +13,9 @@ import { isHex, isRgbOrRgba } from "@/utils/color";
 import { PatternSetting } from "./pattern-setting";
 
 export default function GlobalConfig() {
+  // Hooks
+  const { t } = useTranslation();
+
   // Store
   const {
     globalConfig,
@@ -28,6 +32,7 @@ export default function GlobalConfig() {
     setTextColor,
     setLuckyCardColor,
     setIsShowPrizeList,
+    setLanguage,
     reset: resetGlobal,
   } = useGlobalStore();
   const { resetDefault: resetPrize } = usePrizeStore();
@@ -124,15 +129,15 @@ export default function GlobalConfig() {
     <>
       <dialog ref={resetDataDialogRef} className="modal border-none">
         <div className="modal-box">
-          <h3 className="text-lg font-bold">Attention!</h3>
-          <p className="py-4">This operation will reset all data. Do you want to continue?</p>
+          <h3 className="text-lg font-bold">{t("common.attention")}</h3>
+          <p className="py-4">{t("global.resetDataConfirm")}</p>
           <div className="modal-action">
             <div className="flex gap-3">
               <button className="btn" onClick={() => resetDataDialogRef.current?.close()}>
-                Cancel
+                {t("common.cancel")}
               </button>
               <button className="btn btn-success" onClick={resetData}>
-                OK
+                {t("common.ok")}
               </button>
             </div>
           </div>
@@ -140,51 +145,62 @@ export default function GlobalConfig() {
       </dialog>
 
       <div>
-        <h2 className="text-3xl sm:text-4x pb-4">Global configuration</h2>
+        <h2 className="text-3xl sm:text-4x pb-4">{t("global.title")}</h2>
         <div className="mb-4">
           <button
             className="btn btn-sm btn-primary"
             onClick={() => resetDataDialogRef.current?.showModal()}
           >
-            Reset all data
+            {t("global.resetAllData")}
           </button>
         </div>
 
         <form className="space-y-4">
           <div>
             <label className="label">
-              <span className="label-text">Title</span>
+              <span className="label-text">{t("language.label")}</span>
+            </label>
+            <select
+              className="w-full max-w-xs select select-sm select-bordered"
+              value={globalConfig.language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="en">{t("language.english")}</option>
+              <option value="vi">{t("language.vietnamese")}</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="label">
+              <span className="label-text">{t("global.titleLabel")}</span>
             </label>
             <input
               type="text"
               value={globalConfig.topTitle}
               onChange={(e) => setTopTitle(e.target.value)}
-              placeholder="Enter title"
+              placeholder={t("global.titlePlaceholder")}
               className="w-full max-w-xs input input-bordered input-sm"
             />
           </div>
 
           <div>
             <label className="label">
-              <span className="label-text">Number of columns</span>
+              <span className="label-text">{t("global.columnsLabel")}</span>
             </label>
             <input
               type="number"
               value={rowCountValue}
               onChange={(e) => setRowCountValue(Number(e.target.value))}
-              placeholder="Type here"
+              placeholder={t("global.columnsPlaceholder")}
               className="w-full max-w-xs input input-bordered input-sm"
             />
-            <div
-              className="tooltip"
-              data-tip="This item is time consuming and performance intensive"
-            >
+            <div className="tooltip" data-tip={t("global.resetLayoutTooltip")}>
               <button
                 className="ml-5 btn btn-info btn-sm"
                 disabled={isRowCountChange !== 1}
                 onClick={resetPersonLayout}
               >
-                <span>Reset layout</span>
+                <span>{t("global.resetLayout")}</span>
                 {isRowCountChange === 2 && <span className="loading loading-ring loading-md" />}
               </button>
             </div>
@@ -192,7 +208,7 @@ export default function GlobalConfig() {
 
           <div>
             <label className="label">
-              <span className="label-text">Select theme</span>
+              <span className="label-text">{t("global.selectTheme")}</span>
             </label>
             <select
               data-choose-theme
@@ -200,7 +216,7 @@ export default function GlobalConfig() {
               value={themeConfig.name}
               onChange={(e) => setThemeValue(e.target.value)}
             >
-              <option disabled>Select topic</option>
+              <option disabled>{t("global.selectThemePlaceholder")}</option>
               {themeList.map((item, index) => (
                 <option key={index} value={item}>
                   {item}
@@ -211,31 +227,33 @@ export default function GlobalConfig() {
 
           <div>
             <label className="label">
-              <span className="label-text">Select background image </span>
+              <span className="label-text">{t("global.selectBackground")}</span>
             </label>
             <select
               className="w-full max-w-xs border-solid select select-sm select-bordered border-1 capitalize"
               value={themeConfig.background?.id}
               onChange={(e) => {
                 const selected = [
-                  { name: "None", url: "", id: "" },
+                  { name: t("global.none"), url: "", id: "" },
                   ...globalConfig.imageList,
                 ].find((item) => item.id === e.target.value);
                 setBackground(selected as any);
               }}
             >
-              <option disabled>Select background image</option>
-              {[{ name: "None", url: "", id: "" }, ...globalConfig.imageList].map((item, index) => (
-                <option key={index} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
+              <option disabled>{t("global.selectBackgroundPlaceholder")}</option>
+              {[{ name: t("global.none"), url: "", id: "" }, ...globalConfig.imageList].map(
+                (item, index) => (
+                  <option key={index} value={item.id}>
+                    {item.name}
+                  </option>
+                )
+              )}
             </select>
           </div>
 
           <div>
             <label className="label">
-              <span className="label-text">Card color</span>
+              <span className="label-text">{t("global.cardColor")}</span>
             </label>
             <input
               type="color"
@@ -247,7 +265,7 @@ export default function GlobalConfig() {
 
           <div>
             <label className="label">
-              <span className="label-text">Winning card color</span>
+              <span className="label-text">{t("global.winningCardColor")}</span>
             </label>
             <input
               type="color"
@@ -259,7 +277,7 @@ export default function GlobalConfig() {
 
           <div>
             <label className="label">
-              <span className="label-text">Text color</span>
+              <span className="label-text">{t("global.textColor")}</span>
             </label>
             <input
               type="color"
@@ -272,7 +290,7 @@ export default function GlobalConfig() {
           <div className="flex gap-2">
             <div>
               <label className="label">
-                <span className="label-text">Card width</span>
+                <span className="label-text">{t("global.cardWidth")}</span>
               </label>
               <input
                 type="number"
@@ -289,7 +307,7 @@ export default function GlobalConfig() {
 
             <div>
               <label className="label">
-                <span className="label-text">Card height</span>
+                <span className="label-text">{t("global.cardHeight")}</span>
               </label>
               <input
                 type="number"
@@ -307,13 +325,13 @@ export default function GlobalConfig() {
 
           <div>
             <label className="label">
-              <span className="label-text">Text size</span>
+              <span className="label-text">{t("global.textSize")}</span>
             </label>
             <input
               type="number"
               value={themeConfig.textSize}
               onChange={(e) => setTextSize(Number(e.target.value))}
-              placeholder="Type here"
+              placeholder={t("global.columnsPlaceholder")}
               className="w-full max-w-xs input input-bordered input-sm"
             />
           </div>
@@ -326,13 +344,13 @@ export default function GlobalConfig() {
               className="mt-2 border-solid checkbox checkbox-secondary border-1"
             />
             <label className="label">
-              <span className="label-text">Always display the prize list</span>
+              <span className="label-text">{t("global.alwaysDisplayPrizeList")}</span>
             </label>
           </div>
 
           <div>
             <label className="label">
-              <span className="label-text">Pattern color</span>
+              <span className="label-text">{t("global.patternColor")}</span>
             </label>
             <input
               type="color"
@@ -344,7 +362,7 @@ export default function GlobalConfig() {
 
           <div>
             <label className="label">
-              <span className="label-text">Pattern settings</span>
+              <span className="label-text">{t("global.patternSettings")}</span>
             </label>
             <div className="h-auto w-fit">
               <PatternSetting
@@ -359,14 +377,11 @@ export default function GlobalConfig() {
 
           <div className="flex gap-2">
             <button className="mt-5 btn btn-info btn-sm" onClick={clearPattern}>
-              <span>Clear pattern settings</span>
+              <span>{t("global.clearPatternSettings")}</span>
             </button>
-            <div
-              className="tooltip"
-              data-tip="The default pattern setting is effective for 17 columns. Please set the other number of columns by yourself."
-            >
+            <div className="tooltip" data-tip={t("global.defaultPatternTooltip")}>
               <button className="mt-5 btn btn-info btn-sm" onClick={resetPattern}>
-                <span>Default pattern settings</span>
+                <span>{t("global.defaultPatternSettings")}</span>
               </button>
             </div>
           </div>

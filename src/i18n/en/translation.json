@@ -1,8 +1,124 @@
 {
-  "temporary": {
-    "title": "Add temporary lottery",
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "add": "Add to",
+    "save": "Save",
+    "reset": "Reset",
+    "close": "Close",
+    "edit": "Edit",
+    "name": "Name",
+    "order": "Order",
+    "operate": "Operate",
+    "attention": "Attention!",
+    "loading": "Loading..."
+  },
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "vietnamese": "Vietnamese"
+  },
+  "navigation": {
+    "globalConfig": "Global config",
+    "userConfig": "User config",
+    "personList": "Person list",
+    "winnerList": "Winner list",
+    "prizeConfig": "Prize config",
+    "additionalConfig": "Additional config",
+    "imageList": "Image list",
+    "musicList": "Music list",
+    "userGuide": "User Guide"
+  },
+  "global": {
+    "title": "Global configuration",
+    "resetAllData": "Reset all data",
+    "resetDataConfirm": "This operation will reset all data. Do you want to continue?",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Enter title",
+    "columnsLabel": "Number of columns",
+    "columnsPlaceholder": "Type here",
+    "resetLayout": "Reset layout",
+    "resetLayoutTooltip": "This item is time consuming and performance intensive",
+    "selectTheme": "Select theme",
+    "selectThemePlaceholder": "Select topic",
+    "selectBackground": "Select background image",
+    "selectBackgroundPlaceholder": "Select background image",
+    "none": "None",
+    "cardColor": "Card color",
+    "winningCardColor": "Winning card color",
+    "textColor": "Text color",
+    "cardWidth": "Card width",
+    "cardHeight": "Card height",
+    "textSize": "Text size",
+    "alwaysDisplayPrizeList": "Always display the prize list",
+    "patternColor": "Pattern color",
+    "patternSettings": "Pattern settings",
+    "clearPatternSettings": "Clear pattern settings",
+    "defaultPatternSettings": "Default pattern settings",
+    "defaultPatternTooltip": "The default pattern setting is effective for 17 columns. Please set the other number of columns by yourself."
+  },
+  "prize": {
+    "title": "Prize configuration",
+    "addPrize": "Add to",
+    "defaultList": "Default list",
+    "deleteAll": "Delete all",
+    "operationWarning": "Performing operations may reset data, please operate with caution",
     "name": "Prize name",
-    "allowAllMembersToJoin": "Allow all members to join",
-    "numberOfWinners": "Number of winners"
+    "namePlaceholder": "Name",
+    "allowAllMembersToJoin": "All members participate",
+    "numberOfWinners": "Number of people in the lottery",
+    "numberOfWinnersPlaceholder": "Number of winners",
+    "extracted": "Extracted",
+    "extractedProgress": "Extracted:{{used}}/{{total}}",
+    "image": "Image",
+    "chooseImage": "Choose a picture",
+    "singleDrawCount": "The number of single draws",
+    "setup": "Set up"
+  },
+  "person": {
+    "title": "Person configuration",
+    "allPersons": "All persons",
+    "alreadyDrawn": "Already drawn",
+    "notDrawn": "Not drawn",
+    "importExcel": "Import Excel",
+    "exportExcel": "Export Excel",
+    "addPerson": "Add person",
+    "deletePerson": "Delete person",
+    "clearAll": "Clear all"
+  },
+  "music": {
+    "title": "Music configuration",
+    "addMusic": "Add music",
+    "deleteAll": "Delete all",
+    "resetDefault": "Reset default",
+    "musicName": "Music name",
+    "musicUrl": "Music URL",
+    "play": "Play",
+    "pause": "Pause"
+  },
+  "image": {
+    "title": "Image configuration",
+    "addImage": "Add image",
+    "deleteAll": "Delete all",
+    "resetDefault": "Reset default",
+    "imageName": "Image name",
+    "imageUrl": "Image URL",
+    "preview": "Preview"
+  },
+  "home": {
+    "title": "NTH Lottery",
+    "startDraw": "Start Draw",
+    "stopDraw": "Stop Draw",
+    "noPrizes": "No prizes configured",
+    "noPersons": "No persons available",
+    "winner": "Winner",
+    "congratulations": "Congratulations!"
+  },
+  "validation": {
+    "required": "This field is required",
+    "minValue": "Minimum is {{min}}",
+    "maxValue": "Maximum is {{max}}",
+    "invalidFormat": "Invalid format"
   }
 }

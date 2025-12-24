@@ -22,6 +22,7 @@ export interface GlobalConfig {
   rowCount: number;
   isSHowPrizeList: boolean;
   topTitle: string;
+  language: string;
   theme: Theme;
   musicList: IMusic[];
   imageList: IImage[];
@@ -37,6 +38,7 @@ export interface GlobalState {
   currentMusic: CurrentMusic;
   setRowCount: (count: number) => void;
   setTopTitle: (title: string) => void;
+  setLanguage: (language: string) => void;
   setTheme: (theme: Pick<Theme, "name" | "detail">) => void;
   setCardColor: (color: string) => void;
   setLuckyCardColor: (color: string) => void;
@@ -60,11 +62,18 @@ export interface GlobalState {
   reset: () => void;
 }
 
+const getBrowserLanguage = () => {
+  const browserLang = navigator.language.split("-")[0];
+  const supportedLanguages = ["en", "vi"];
+  return supportedLanguages.includes(browserLang) ? browserLang : "en";
+};
+
 const initialState = {
   globalConfig: {
     rowCount: 17,
     isSHowPrizeList: true,
     topTitle: "NTH Lottery",
+    language: localStorage.getItem("i18nextLng") || getBrowserLanguage(),
     theme: {
       name: "dracula",
       detail: { primary: "#0f5fd3" },
@@ -100,6 +109,15 @@ export const useGlobalStore = create<GlobalState>()(
       setTopTitle: (title) =>
         set((state) => {
           state.globalConfig.topTitle = title;
+        }),
+
+      setLanguage: (language) =>
+        set((state) => {
+          state.globalConfig.language = language;
+          // Also update i18next
+          import("i18next").then((i18n) => {
+            i18n.default.changeLanguage(language);
+          });
         }),
 
       setTheme: (theme) =>
