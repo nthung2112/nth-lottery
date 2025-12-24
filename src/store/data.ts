@@ -572,7 +572,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "2",
       name: "Third prize",
-      url: "./images/third-prize.png",
+      url: "/images/third-prize.png",
     },
     separateCount: {
       enable: true,
@@ -593,7 +593,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "1",
       name: "Second prize",
-      url: "./images/second-prize.png",
+      url: "/images/second-prize.png",
     },
     separateCount: {
       enable: false,
@@ -614,7 +614,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "0",
       name: "First prize",
-      url: "./images/first-prize.png",
+      url: "/images/first-prize.png",
     },
     separateCount: {
       enable: false,
@@ -635,7 +635,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "3",
       name: "Super prize",
-      url: "./images/super-prize.png",
+      url: "/images/super-prize.png",
     },
     separateCount: {
       enable: false,
@@ -656,7 +656,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "4",
       name: "Special prize",
-      url: "./images/special-prize.png",
+      url: "/images/special-prize.png",
     },
     separateCount: {
       enable: false,
@@ -679,7 +679,7 @@ export const defaultCurrentPrize = <IPrizeConfig>{
   picture: {
     id: "2",
     name: "Third prize",
-    url: "./images/third-prize.png",
+    url: "/images/third-prize.png",
   },
   separateCount: {
     enable: true,
@@ -717,27 +717,27 @@ export const defaultImageList = [
   {
     id: "0",
     name: "First prize",
-    url: "./images/first-prize.png",
+    url: "/images/first-prize.png",
   },
   {
     id: "1",
     name: "Second prize",
-    url: "./images/second-prize.png",
+    url: "/images/second-prize.png",
   },
   {
     id: "2",
     name: "Third prize",
-    url: "./images/third-prize.png",
+    url: "/images/third-prize.png",
   },
   {
     id: "3",
     name: "Super prize",
-    url: "./images/super-prize.png",
+    url: "/images/super-prize.png",
   },
   {
     id: "4",
     name: "Special prize",
-    url: "./images/special-prize.png",
+    url: "/images/special-prize.png",
   },
 ];
 

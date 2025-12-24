@@ -54,13 +54,13 @@ export default function PersonAll() {
     });
 
     const fieldMapping = {
-      uid: "编号",
-      isWin: "是否中奖",
-      department: "部门",
-      name: "姓名",
-      identity: "身份",
-      prizeName: "获奖",
-      prizeTime: "获奖时间",
+      uid: "ID",
+      isWin: "Is Winner",
+      department: "Department",
+      name: "Name",
+      identity: "Identity",
+      prizeName: "Prize Name",
+      prizeTime: "Prize Time",
     };
 
     const renamedData = data.map((item: any) => {
@@ -140,7 +140,9 @@ export default function PersonAll() {
       <dialog ref={delAllDataDialogRef} className="border-none modal">
         <div className="modal-box">
           <h3 className="text-lg font-bold">Are you sure?</h3>
-          <p className="py-4">This operation will delete all personnel data. Do you want to continue?</p>
+          <p className="py-4">
+            This operation will delete all personnel data. Do you want to continue?
+          </p>
           <div className="modal-action">
             <div className="flex gap-3">
               <button className="btn" onClick={() => delAllDataDialogRef.current?.close()}>

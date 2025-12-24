@@ -7,11 +7,12 @@ import { usePrizeStore } from "@/store/prize";
 
 export default function PrizeConfig() {
   const { globalConfig } = useGlobalStore();
-  const { prizeConfig, resetDefault, deleteAllPrizeConfig } = usePrizeStore();
+  const { prizeConfig, resetDefault, deleteAllPrizeConfig, setPrizeList, updatePrizeConfig } =
+    usePrizeStore();
 
-  const [prizeList, setPrizeList] = useState<IPrizeConfig[]>(prizeConfig.prizeList);
   const [selectedPrize, setSelectedPrize] = useState<IPrizeConfig | null>(null);
   const numberSeparateRef = useRef<NumberSeparateRef>(null);
+  const prizeList = prizeConfig.prizeList;
 
   const addPrize = () => {
     const defaultPrizeConfig: IPrizeConfig = {
@@ -137,188 +138,182 @@ export default function PrizeConfig() {
         <span>Performing operations may reset data, please operate with caution</span>
       </div>
 
-      <ul className="p-0 m-0">
-        {prizeList.map((item, index) => (
-          <li
-            key={item.id}
-            className={`flex gap-10 ${
-              prizeConfig.currentPrize?.id === item.id ? "border-1 border-dotted rounded-xl" : ""
-            }`}
-          >
-            <label className="max-w-xs mb-10 form-control">
-              <div className="flex flex-col items-center gap-2 pt-5">
-                <SvgIcon
-                  className={`cursor-pointer hover:text-blue-400 ${
-                    index === 0 ? "opacity-0 cursor-default" : ""
-                  }`}
-                  name="AArrowUp"
-                  onClick={() => sort(item, 1)}
-                />
-                <SvgIcon
-                  className={`cursor-pointer hover:text-blue-400 ${
-                    index === prizeList.length - 1 ? "opacity-0 cursor-default" : ""
-                  }`}
-                  name="AArrowDown"
-                  onClick={() => sort(item, 0)}
-                />
-              </div>
-            </label>
-
-            <label className="w-1/2 max-w-xs mb-10 form-control">
-              <div className="label">
-                <span className="label-text">Name</span>
-              </div>
-              <input
-                type="text"
-                value={item.name}
-                onChange={(e) => {
-                  const newList = [...prizeList];
-                  const prize = newList.find((p) => p.id === item.id);
-                  if (prize) prize.name = e.target.value;
-                  setPrizeList(newList);
-                }}
-                placeholder="Name"
-                className="w-full max-w-xs input-sm input input-bordered"
-              />
-            </label>
-
-            <label className="w-1/2 max-w-xs mb-10 form-control">
-              <div className="label">
-                <span className="label-text">All members participate</span>
-              </div>
-              <input
-                type="checkbox"
-                checked={item.isAll}
-                onChange={() => {
-                  const newList = prizeList.map((prize) =>
-                    prize.id === item.id ? { ...prize, isAll: !prize.isAll } : prize
-                  );
-                  setPrizeList(newList);
-                }}
-                className="mt-2 border-solid checkbox checkbox-secondary border-1"
-              />
-            </label>
-
-            <label className="w-1/2 max-w-xs mb-10 form-control">
-              <div className="label">
-                <span className="label-text">Number of people in the lottery</span>
-              </div>
-              <input
-                type="number"
-                value={item.count}
-                onChange={(e) => {
-                  const newList = [...prizeList];
-                  const prize = newList.find((p) => p.id === item.id);
-                  if (prize) prize.count = parseInt(e.target.value);
-                  setPrizeList(newList);
-                  changePrizePerson(item);
-                }}
-                placeholder="Number of winners"
-                className="w-full max-w-xs p-0 m-0 input-sm input input-bordered"
-              />
-              <div
-                className="tooltip tooltip-bottom"
-                data-tip={`Extracted:${item.isUsedCount}/${item.count}`}
-              >
-                <progress className="w-full progress" value={item.isUsedCount} max={item.count} />
-              </div>
-            </label>
-
-            <label className="w-1/2 max-w-xs mb-10 form-control">
-              <div className="label">
-                <span className="label-text">Extracted</span>
-              </div>
-              <input
-                type="checkbox"
-                checked={item.isUsed}
-                onChange={() => changePrizeStatus(item)}
-                className="mt-2 border-solid checkbox checkbox-secondary border-1"
-              />
-            </label>
-
-            <label className="w-full max-w-xs mb-10 form-control">
-              <div className="label">
-                <span className="label-text">Image</span>
-              </div>
-              <select
-                className="w-full max-w-xs select select-warning select-sm"
-                value={item.picture.id}
-                onChange={(e) => {
-                  const newList = [...prizeList];
-                  const prize = newList.find((p) => p.id === item.id);
-                  if (prize) {
-                    prize.picture = globalConfig.imageList.find(
-                      (img) => img.id === e.target.value
-                    ) || {
-                      id: "",
-                      name: "",
-                      url: "",
-                    };
-                  }
-                  setPrizeList(newList);
-                }}
-              >
-                {item.picture.id && <option value="">❌</option>}
-                <option disabled>Choose a picture</option>
-                {globalConfig.imageList.map((pic) => (
-                  <option key={pic.id} value={pic.id}>
-                    {pic.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            {item.separateCount && (
-              <label className="w-full max-w-xs mb-10 form-control">
-                <div className="label">
-                  <span className="label-text">The number of single draws</span>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Order</th>
+            <th>Name</th>
+            <th>All members participate</th>
+            <th>Number of people in the lottery</th>
+            <th>Extracted</th>
+            <th>Image</th>
+            <th>The number of single draws</th>
+            <th>Operate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {prizeList.map((item, index) => (
+            <tr key={item.id}>
+              <td>
+                <div className="flex flex-col items-center gap-2">
+                  <SvgIcon
+                    className={`cursor-pointer hover:text-blue-400 ${
+                      index === 0 ? "opacity-0 cursor-default" : ""
+                    }`}
+                    name="ChevronUp"
+                    onClick={() => sort(item, 1)}
+                  />
+                  <SvgIcon
+                    className={`cursor-pointer hover:text-blue-400 ${
+                      index === prizeList.length - 1 ? "opacity-0 cursor-default" : ""
+                    }`}
+                    name="ChevronDown"
+                    onClick={() => sort(item, 0)}
+                  />
                 </div>
-                <div className="flex justify-start w-full h-full" onClick={() => selectPrize(item)}>
-                  {item.separateCount.countList.length > 0 ? (
-                    <ul className="flex flex-wrap w-full h-full gap-1 p-0 pt-1 m-0 cursor-pointer">
-                      {item.separateCount.countList.map((se) => (
-                        <li
-                          key={se.id}
-                          className="relative flex items-center justify-center w-8 h-8 bg-slate-600/60 separated"
-                        >
-                          <div
-                            className="flex items-center justify-center w-full h-full tooltip"
-                            data-tip={`Extracted:${se.isUsedCount}/${se.count}`}
-                          >
-                            <div
-                              className="absolute left-0 z-50 h-full bg-blue-300/80"
-                              style={{ width: `${(se.isUsedCount * 100) / se.count}%` }}
-                            />
-                            <span>{se.count}</span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <button className="btn btn-secondary btn-xs">Set up</button>
-                  )}
-                </div>
-              </label>
-            )}
+              </td>
 
-            <label className="w-full max-w-xs mb-10 form-control">
-              <div className="label">
-                <span className="label-text">Operate</span>
-              </div>
-              <div className="flex gap-2">
-                <button
-                  className="btn btn-error btn-sm"
-                  onClick={() => {
-                    setPrizeList(prizeList.filter((p) => p.id !== item.id));
+              <td>
+                <input
+                  type="text"
+                  value={item.name}
+                  onChange={(e) => {
+                    setPrizeList(
+                      prizeList.map((p) => (p.id === item.id ? { ...p, name: e.target.value } : p))
+                    );
+                  }}
+                  placeholder="Name"
+                  className="w-full max-w-xs input-sm input input-bordered"
+                />
+              </td>
+
+              <td>
+                <input
+                  type="checkbox"
+                  checked={item.isAll}
+                  onChange={() => {
+                    setPrizeList(
+                      prizeList.map((p) => (p.id === item.id ? { ...p, isAll: !p.isAll } : p))
+                    );
+                  }}
+                  className="mt-2 border-solid checkbox checkbox-secondary border-1"
+                />
+              </td>
+
+              <td>
+                <input
+                  type="number"
+                  value={item.count}
+                  onChange={(e) => {
+                    setPrizeList(
+                      prizeList.map((p) =>
+                        p.id === item.id ? { ...p, count: parseInt(e.target.value) } : p
+                      )
+                    );
+                    changePrizePerson(item);
+                  }}
+                  placeholder="Number of winners"
+                  className="w-full max-w-xs m-0 input-sm input input-bordered"
+                />
+                <div
+                  className="tooltip tooltip-bottom"
+                  data-tip={`Extracted:${item.isUsedCount}/${item.count}`}
+                >
+                  <progress className="w-full progress" value={item.isUsedCount} max={item.count} />
+                </div>
+              </td>
+
+              <td>
+                <input
+                  type="checkbox"
+                  checked={item.isUsed}
+                  onChange={() => changePrizeStatus(item)}
+                  className="mt-2 border-solid checkbox checkbox-secondary border-1"
+                />
+              </td>
+
+              <td>
+                <select
+                  className="w-full max-w-xs select select-warning select-sm"
+                  value={item.picture.id}
+                  onChange={(e) => {
+                    setPrizeList(
+                      prizeList.map((p) =>
+                        p.id === item.id
+                          ? {
+                              ...p,
+                              picture: globalConfig.imageList.find(
+                                (img) => img.id === e.target.value
+                              ) || {
+                                id: "",
+                                name: "",
+                                url: "",
+                              },
+                            }
+                          : p
+                      )
+                    );
                   }}
                 >
-                  Delete
-                </button>
-              </div>
-            </label>
-          </li>
-        ))}
-      </ul>
+                  {item.picture.id && <option value="">❌</option>}
+                  <option disabled>Choose a picture</option>
+                  {globalConfig.imageList.map((pic) => (
+                    <option key={pic.id} value={pic.id}>
+                      {pic.name}
+                    </option>
+                  ))}
+                </select>
+              </td>
+
+              {item.separateCount && (
+                <td>
+                  <div
+                    className="flex justify-start w-full h-full"
+                    onClick={() => selectPrize(item)}
+                  >
+                    {item.separateCount.countList.length > 0 ? (
+                      <ul className="flex flex-wrap w-full h-full gap-1 p-0 pt-1 m-0 cursor-pointer">
+                        {item.separateCount.countList.map((se) => (
+                          <li
+                            key={se.id}
+                            className="relative flex items-center justify-center w-8 h-8 bg-slate-600/60 separated"
+                          >
+                            <div
+                              className="flex items-center justify-center w-full h-full tooltip"
+                              data-tip={`Extracted:${se.isUsedCount}/${se.count}`}
+                            >
+                              <div
+                                className="absolute left-0 z-50 h-full bg-blue-300/80"
+                                style={{ width: `${(se.isUsedCount * 100) / se.count}%` }}
+                              />
+                              <span>{se.count}</span>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <button className="btn btn-secondary btn-xs">Set up</button>
+                    )}
+                  </div>
+                </td>
+              )}
+
+              <td>
+                <div className="flex gap-2">
+                  <button
+                    className="btn btn-error btn-sm"
+                    onClick={() => {
+                      setPrizeList(prizeList.filter((p) => p.id !== item.id));
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       {selectedPrize && (
         <NumberSeparate

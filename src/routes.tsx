@@ -64,7 +64,7 @@ export const configRoutes: any = {
     {
       path: "global",
       meta: {
-        title: "Addition config",
+        title: "Additional config",
         icon: "global",
       },
       children: [

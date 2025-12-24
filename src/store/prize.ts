@@ -10,7 +10,7 @@ interface PrizeState {
     currentPrize: IPrizeConfig;
     temporaryPrize: IPrizeConfig;
   };
-  setPrizeConfig: (prizeList: IPrizeConfig[]) => void;
+  setPrizeList: (prizeList: IPrizeConfig[]) => void;
   addPrizeConfig: (prizeConfigItem: IPrizeConfig) => void;
   deletePrizeConfig: (prizeConfigItemId: number | string) => void;
   updatePrizeConfig: (prizeConfigItem: IPrizeConfig) => void;
@@ -57,7 +57,7 @@ export const usePrizeStore = create<PrizeState>()(
     immer((set, _get) => ({
       ...initialState,
 
-      setPrizeConfig: (prizeList) =>
+      setPrizeList: (prizeList) =>
         set((state) => {
           state.prizeConfig.prizeList = prizeList;
         }),

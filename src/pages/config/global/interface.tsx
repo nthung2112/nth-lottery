@@ -11,7 +11,7 @@ import { isHex, isRgbOrRgba } from "@/utils/color";
 
 import { PatternSetting } from "./pattern-setting";
 
-export default function FaceConfig() {
+export default function GlobalConfig() {
   // Store
   const {
     globalConfig,
