@@ -572,7 +572,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "2",
       name: "Third prize",
-      url: "https://1kw20.fun/resource/image/image3.png",
+      url: "./images/third-prize.png",
     },
     separateCount: {
       enable: true,
@@ -593,7 +593,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "1",
       name: "Second prize",
-      url: "https://1kw20.fun/resource/image/image2.png",
+      url: "./images/second-prize.png",
     },
     separateCount: {
       enable: false,
@@ -614,7 +614,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "0",
       name: "First prize",
-      url: "https://1kw20.fun/resource/image/image1.png",
+      url: "./images/first-prize.png",
     },
     separateCount: {
       enable: false,
@@ -635,7 +635,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "3",
       name: "Super prize",
-      url: "https://1kw20.fun/resource/image/image4.png",
+      url: "./images/super-prize.png",
     },
     separateCount: {
       enable: false,
@@ -656,7 +656,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
     picture: {
       id: "4",
       name: "Special prize",
-      url: "https://1kw20.fun/resource/image/image5.png",
+      url: "./images/special-prize.png",
     },
     separateCount: {
       enable: false,
@@ -679,7 +679,7 @@ export const defaultCurrentPrize = <IPrizeConfig>{
   picture: {
     id: "2",
     name: "Third prize",
-    url: "https://1kw20.fun/resource/image/image3.png",
+    url: "./images/third-prize.png",
   },
   separateCount: {
     enable: true,
@@ -717,32 +717,32 @@ export const defaultImageList = [
   {
     id: "0",
     name: "First prize",
-    url: "https://1kw20.fun/resource/image/image1.png",
+    url: "./images/first-prize.png",
   },
   {
     id: "1",
     name: "Second prize",
-    url: "https://1kw20.fun/resource/image/image2.png",
+    url: "./images/second-prize.png",
   },
   {
     id: "2",
     name: "Third prize",
-    url: "https://1kw20.fun/resource/image/image3.png",
+    url: "./images/third-prize.png",
   },
   {
     id: "3",
     name: "Super prize",
-    url: "https://1kw20.fun/resource/image/image4.png",
+    url: "./images/super-prize.png",
   },
   {
     id: "4",
     name: "Special prize",
-    url: "https://1kw20.fun/resource/image/image5.png",
+    url: "./images/special-prize.png",
   },
 ];
 
 // 2025
 export const defaultPatternList = [
   21, 38, 55, 54, 53, 70, 87, 88, 89, 23, 40, 57, 74, 91, 92, 93, 76, 59, 42, 25, 24, 27, 28, 29,
-  46, 63, 62, 61, 78, 95, 96, 97, 20, 19, 31, 48, 65, 66, 67, 84, 101, 100, 99, 32, 33,
+  46, 63, 62, 61, 78, 95, 96, 97, 20, 19, 31, 48, 65, 66, 67, 84, 101, 100, 99, 32, 33, 82,
 ];
