@@ -32,6 +32,7 @@ export function PlayMusic() {
 
     audioRef.current.pause();
     audioRef.current.src = audioUrl;
+    audioRef.current.loop = true;
     audioRef.current.play();
   };
 
