@@ -45,7 +45,7 @@ export function createElementStyle(
   }
 
   element.children[1].style.fontSize = textSize + "px";
-  element.children[1].style.lineHeight = textSize * 3 + "px";
+  // element.children[1].style.lineHeight = textSize * 3 + "px";
   element.children[1].style.textShadow = `0 0 12px ${rgba(cardColor, 0.95)}`;
   if (person.name) {
     element.children[1].textContent = person.name;

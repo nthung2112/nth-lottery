@@ -1,53 +1,31 @@
-# Hướng dẫn sử dụng
+# Operation Guide
 
-## Các bước
+## Steps
 
-1.  **Thiết lập ban đầu**:  
-    Khi truy cập lần đầu, sẽ không có dữ liệu hiển thị. Bạn có thể chọn sử dụng dữ liệu mặc định để xem hiệu ứng hiển thị tổng thể. Tuy nhiên, khuyến nghị nhập dữ liệu của riêng bạn để vận hành. Thực hiện theo các bước sau:
+1. Upon first entry, no data will be displayed. You can choose to use default data to view the overall display effect. It is recommended to import your own data for operation. The steps are as follows:
 
-        a. **Cấu hình nhân sự** - Điều hướng đến phần "Danh sách người chơi" và nhấp vào **Tải xuống mẫu** để tải xuống mẫu dữ liệu. Điền dữ liệu trong khi đảm bảo rằng các tiêu đề không thay đổi.
+   a. Personnel Configuration - Personnel List - Download Template, download the data template and modify it with your data (please note that the header cannot be modified).
 
-        b. Sau khi chỉnh sửa, nhấp vào **Tải lên tệp** trên cùng một trang để tải lên tệp Excel đã sửa đổi.
+   b. After modification, click 'Upload File' on the same page to upload the modified Excel table.
 
-2.  **Cấu hình giải thưởng**:  
-    Chỉnh sửa thông tin giải thưởng của bạn trong phần cấu hình giải thưởng. Giữ tên ngắn gọn để hiển thị tốt hơn.
+2. Enter the Prize Configuration to modify your prize information. Try to keep the name short for better display; "All Participants" indicates whether this award will be drawn from all participants (those who have already won can still participate); "Winners" refers to the number of people to be drawn for this award; "Already Won" cannot be edited; "Selected" means this award has been used, unselecting it will reset the award but not the winners; "Image" is the prize image displayed on the home page (you can upload images in the image list); "Left Icon" is used to adjust the order of prizes.
 
-- **"Tất cả người tham gia"**: Cho biết liệu giải thưởng có được rút từ toàn bộ người tham gia hay không (bao gồm cả những người đã trúng thưởng).
-- **Số người chiến thắng**: Chỉ định số người sẽ trúng giải thưởng này.
-- **Số người chiến thắng hiện tại**: Không thể chỉnh sửa; theo dõi số người chiến thắng đã được chọn.
-- **Tùy chọn "Đã chọn"**: Khi được chọn, giải thưởng được đánh dấu là đã sử dụng. Bỏ chọn sẽ đặt lại giải thưởng, nhưng không đặt lại những người chiến thắng đã được chọn.
-- **Hình ảnh**: Được sử dụng để hiển thị giải thưởng trên trang chủ (hình ảnh có thể được tải lên trong danh sách hình ảnh).
-- **Biểu tượng bên trái**: Điều chỉnh thứ tự giải thưởng.
+Completing the above two steps allows normal use.
 
-Sau khi hoàn thành hai bước trên, hệ thống đã sẵn sàng để sử dụng.
+## Function Description
 
-## Mô tả tính năng
+1. Add Temporary Draw: There is a '+' button in the prize list on the draw page. Clicking it allows you to add a temporary draw. Note: Only one temporary draw can be added at a time. After adding successfully, the current prize will be set to the temporary prize, and after drawing, it will return to the normal prize list.
+2. Music and Image List: You can upload files yourself for use. After uploading images successfully, you can select them in the prize configuration for display. After uploading music successfully, it will be added to the play list.
+3. Music Playback: Left-click with the mouse to play/pause, right-click to play the next song.
+4. Interface Configuration - Pattern Settings: You can use the mouse to click and customize the highlighted patterns on the home page.
+5. If you do not want to display the prize list on the home page, uncheck 'Always Show Prize List' in the interface configuration.
+6. When clicking buttons on the home page, the button value will not update immediately but will only update after the animation ends. This is a normal phenomenon.
 
-1. **Thêm quay thưởng tạm thời**:  
-   Trên trang quay thưởng, nhấp vào nút "+" trong danh sách giải thưởng để tạm thời thêm một lần quay. Lưu ý: Chỉ có thể thêm một lần quay tạm thời tại một thời điểm. Sau khi thêm, giải thưởng hiện tại sẽ được đặt làm giải tạm thời. Sau khi một người chiến thắng được chọn, hệ thống sẽ quay lại danh sách giải thưởng bình thường.
+## Shortcuts
 
-2. **Thư viện âm nhạc và hình ảnh**:  
-   Bạn có thể tải lên tệp để sử dụng. Hình ảnh đã tải lên có thể được chọn để hiển thị giải thưởng trong phần cấu hình giải thưởng. Nhạc đã tải lên sẽ được thêm vào danh sách phát.
+Shortcuts are set up on the draw page.
 
-3. **Phát nhạc**:
-
-- **Nhấp chuột trái**: Phát/Tạm dừng.
-- **Nhấp chuột phải**: Phát bài tiếp theo.
-
-4. **Cấu hình giao diện**:  
-   Trong phần "Cài đặt mẫu", bạn có thể tùy chỉnh các mẫu được làm nổi bật trên trang chủ bằng cách nhấp chuột.
-
-5. **Ẩn danh sách giải thưởng trên trang chủ**:  
-   Để ẩn danh sách giải thưởng khỏi hiển thị trên trang chủ, bật tùy chọn "Luôn hiển thị danh sách giải thưởng" trong cấu hình giao diện.
-
-6. **Cập nhật giá trị nút**:  
-   Khi nhấp vào nút trên trang chủ, giá trị nút sẽ không cập nhật ngay lập tức. Nó sẽ cập nhật thành giá trị mục tiêu sau khi hoạt ảnh kết thúc—đây là hành vi bình thường.
-
-## Phím tắt
-
-Các phím tắt có sẵn trên trang quay thưởng.
-
-| Phím tắt  | Mô tả                                             |
-| --------- | ------------------------------------------------- |
-| **Space** | Vào quay thưởng/Bắt đầu/Chọn người thắng/Tiếp tục |
-| **Esc**   | Hủy                                               |
+| Shortcut | Description                                       |
+| -------- | ------------------------------------------------- |
+| Space    | Enter Draw / Start / Draw Lucky Winner / Continue |
+| Esc      | Cancel                                            |

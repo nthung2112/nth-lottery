@@ -164,9 +164,9 @@ export default function PersonAll() {
         <div className="tooltip tooltip-bottom" data-tip={t("person.downloadTemplateTooltip")}>
           <a
             className="no-underline btn btn-secondary btn-sm"
-            download="form.xlsx"
+            download="template-person.xlsx"
             target="_blank"
-            href="/log-lottery/form.xlsx"
+            href="/assets/personListTemplate.xlsx"
           >
             {t("person.downloadTemplate")}
           </a>
