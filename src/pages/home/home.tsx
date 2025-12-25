@@ -533,7 +533,6 @@ function Home() {
           className="pt-12 m-0 mb-12 tracking-wide text-center leading-12 header-title"
           style={{
             fontSize: `${textSize * 1.5}px`,
-            color: textColor,
           }}
         >
           {globalConfig.topTitle}
