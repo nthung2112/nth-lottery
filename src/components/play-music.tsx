@@ -59,12 +59,12 @@ export function PlayMusic() {
   useEffect(() => {
     // Mount
     setCurrentMusic(localMusicList[0], true);
-    audioRef.current.addEventListener("ended", nextPlay);
+    // audioRef.current.addEventListener("ended", nextPlay);
 
-    // Unmount
-    return () => {
-      audioRef.current.removeEventListener("ended", nextPlay);
-    };
+    // // Unmount
+    // return () => {
+    //   audioRef.current.removeEventListener("ended", nextPlay);
+    // };
   }, []);
 
   useEffect(() => {
