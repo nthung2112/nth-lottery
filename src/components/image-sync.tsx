@@ -16,7 +16,9 @@ const imageDbStore = localforage.createInstance({
 });
 
 export function ImageSync({ imgItem }: ImageSyncProps) {
-  const [imgUrl, setImgUrl] = useState<string>(imgItem.url || "");
+  const [imgUrl, setImgUrl] = useState<string>(
+    imgItem.url !== "Storage" ? import.meta.env.VITE_BASE_URL.slice(0, -1) + imgItem.url : ""
+  );
 
   useEffect(() => {
     const loadImage = async () => {

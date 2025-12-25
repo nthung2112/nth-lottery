@@ -380,10 +380,22 @@ function Home() {
 
     const windowSize = { width: window.innerWidth, height: window.innerHeight };
 
-    luckyTargets.forEach((person, index) => {
-      const cardIndex = selectCard(luckyCardList, tableData.length, person.id);
-      setLuckyCardList((prev) => [...prev, cardIndex]);
+    // Collect all card indices first to avoid race conditions
+    const newCardIndices: number[] = [];
+    const updatedLuckyCardList = [...luckyCardList];
 
+    luckyTargets.forEach((person) => {
+      const cardIndex = selectCard(updatedLuckyCardList, tableData.length, person.id);
+      newCardIndices.push(cardIndex);
+      updatedLuckyCardList.push(cardIndex);
+    });
+
+    // Update state once with all new card indices
+    setLuckyCardList(updatedLuckyCardList);
+
+    // Now animate all the cards
+    luckyTargets.forEach((person, index) => {
+      const cardIndex = newCardIndices[index];
       const item = objectsRef.current[cardIndex];
       const { xTable, yTable } = getElementPosition(
         item,
