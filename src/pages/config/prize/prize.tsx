@@ -80,22 +80,6 @@ export default function PrizeConfig() {
     setPrizeList(updatedList);
   };
 
-  const changePrizePerson = (item: IPrizeConfig) => {
-    let indexPrize = -1;
-    for (let i = 0; i < prizeList.length; i++) {
-      if (prizeList[i].id == item.id) {
-        indexPrize = i;
-        break;
-      }
-    }
-    if (indexPrize > -1) {
-      prizeList[indexPrize].separateCount.countList = [];
-      prizeList[indexPrize].isUsedCount = prizeList[indexPrize].isUsed
-        ? prizeList[indexPrize].count
-        : 0;
-    }
-  };
-
   const sort = (item: IPrizeConfig, direction: number) => {
     const index = prizeList.findIndex((prize) => prize.id === item.id);
     const newList = [...prizeList];
@@ -211,7 +195,6 @@ export default function PrizeConfig() {
                         p.id === item.id ? { ...p, count: parseInt(e.target.value) } : p
                       )
                     );
-                    changePrizePerson(item);
                   }}
                   placeholder={t("prize.numberOfWinnersPlaceholder")}
                   className="w-full max-w-xs m-0 input-sm input input-bordered"
