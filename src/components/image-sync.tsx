@@ -24,7 +24,7 @@ export function ImageSync({ imgItem }: ImageSyncProps) {
         const url = (await imageDbStore.getItem(imgItem.id)) as string;
         setImgUrl(url);
       } else {
-        setImgUrl(imgItem.url);
+        setImgUrl(import.meta.env.VITE_BASE_URL.slice(0, -1) + imgItem.url);
       }
     };
     loadImage();

@@ -97,15 +97,20 @@ export const configRoutes: any = {
   ],
 };
 
-export const routers = createBrowserRouter([
+export const routers = createBrowserRouter(
+  [
+    {
+      Component: Layout,
+      children: [
+        {
+          path: "",
+          Component: Home,
+        },
+        configRoutes,
+      ],
+    },
+  ],
   {
-    Component: Layout,
-    children: [
-      {
-        path: "",
-        Component: Home,
-      },
-      configRoutes,
-    ],
-  },
-]);
+    basename: import.meta.env.VITE_BASE_URL,
+  }
+);

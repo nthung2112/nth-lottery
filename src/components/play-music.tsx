@@ -26,7 +26,9 @@ export function PlayMusic() {
     if (!item.url) return;
 
     const audioUrl =
-      item.url === "Storage" ? ((await audioDbStore.getItem(item.name)) as string) : item.url;
+      item.url === "Storage"
+        ? ((await audioDbStore.getItem(item.name)) as string)
+        : import.meta.env.VITE_BASE_URL.slice(0, -1) + item.url;
 
     audioRef.current.pause();
     audioRef.current.src = audioUrl;
