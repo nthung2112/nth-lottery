@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import { Layout } from "@/components/layout";
 
 import Home from "@/pages/home/home";
@@ -97,20 +97,15 @@ export const configRoutes: any = {
   ],
 };
 
-export const routers = createBrowserRouter(
-  [
-    {
-      Component: Layout,
-      children: [
-        {
-          path: "",
-          Component: Home,
-        },
-        configRoutes,
-      ],
-    },
-  ],
+export const routers = createHashRouter([
   {
-    basename: import.meta.env.VITE_BASE_URL,
-  }
-);
+    Component: Layout,
+    children: [
+      {
+        path: "",
+        Component: Home,
+      },
+      configRoutes,
+    ],
+  },
+]);
