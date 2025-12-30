@@ -1,15 +1,14 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getAlreadyPersonDetail, getAlreadyPersonList, usePersonStore } from "@/store/person";
+import { getAlreadyPersonList, usePersonStore } from "@/store/person";
 import { IPersonConfig } from "@/types/storeType";
 import { Table } from "@/components/table";
+import { useRef } from "react";
 
 export default function PersonAlready() {
   const { t } = useTranslation();
-  const [isDetail, setIsDetail] = useState(false);
-  const { personConfig, moveAlreadyToNot } = usePersonStore();
+  const delAllDataDialogRef = useRef<HTMLDialogElement>(null);
+  const { personConfig, moveAlreadyToNot, resetAlreadyPerson } = usePersonStore();
   const alreadyPersonList = getAlreadyPersonList(personConfig);
-  const alreadyPersonDetail = getAlreadyPersonDetail(personConfig);
 
   const handleMoveNotPerson = (row: IPersonConfig) => {
     moveAlreadyToNot(row);
@@ -39,6 +38,10 @@ export default function PersonAlready() {
       sort: true,
     },
     {
+      label: t("person.timeOfWinning"),
+      props: "prizeTime",
+    },
+    {
       label: t("person.operate"),
       actions: [
         {
@@ -50,43 +53,45 @@ export default function PersonAlready() {
     },
   ];
 
-  const tableColumnsDetail = [
-    ...tableColumnsList.slice(0, -1),
-    {
-      label: t("person.timeOfWinning"),
-      props: "prizeTime",
-    },
-    tableColumnsList[tableColumnsList.length - 1],
-  ];
+  const deleteAll = () => {
+    resetAlreadyPerson();
+    delAllDataDialogRef.current?.close();
+  };
 
   return (
     <div className="overflow-y-auto">
       <h2 className="text-3xl sm:text-4x pb-4">{t("person.managementOfWinners")}</h2>
-      <div className="flex items-center justify-start gap-10">
+      <div className="flex items-center justify-start gap-4">
+        <button
+          className="btn btn-error btn-sm"
+          onClick={() => delAllDataDialogRef.current?.showModal()}
+        >
+          {t("person.resetAll")}
+        </button>
         <div>
           <span>{t("person.numberOfWinners")}: </span>
           <span>{alreadyPersonList.length}</span>
         </div>
-        <div className="flex flex-col">
-          <div className="form-control">
-            <label className="cursor-pointer label">
-              <span className="label-text">{t("person.details")}</span>
-              <input
-                type="checkbox"
-                className="border-solid toggle toggle-primary border-1"
-                checked={isDetail}
-                onChange={(e) => setIsDetail(e.target.checked)}
-              />
-            </label>
-          </div>
-        </div>
       </div>
 
-      {isDetail ? (
-        <Table tableColumns={tableColumnsDetail} data={alreadyPersonDetail} />
-      ) : (
-        <Table tableColumns={tableColumnsList} data={alreadyPersonList} />
-      )}
+      <Table tableColumns={tableColumnsList} data={alreadyPersonList} />
+
+      <dialog ref={delAllDataDialogRef} className="border-none modal">
+        <div className="modal-box">
+          <h3 className="text-lg font-bold">{t("person.areYouSure")}</h3>
+          <p className="py-4">{t("person.deleteAllWinnersConfirm")}</p>
+          <div className="modal-action">
+            <div className="flex gap-3">
+              <button className="btn" onClick={() => delAllDataDialogRef.current?.close()}>
+                {t("common.cancel")}
+              </button>
+              <button className="btn btn-success" onClick={deleteAll}>
+                {t("common.ok")}
+              </button>
+            </div>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 }

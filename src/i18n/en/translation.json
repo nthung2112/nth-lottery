@@ -95,6 +95,7 @@
     "deletePerson": "Delete person",
     "clearAll": "Clear all",
     "deleteAll": "Delete all",
+    "resetAll": "Reset all",
     "downloadTemplate": "Download template",
     "downloadTemplateTooltip": "After downloading the file, please fill in the data in excel and save it in xlsx format",
     "uploadFileTooltip": "Upload the modified excel file",
@@ -114,10 +115,11 @@
     "prize": "Prize",
     "timeOfWinning": "Time of winning",
     "movedToNonWinners": "Moved to the list of non-winners",
-    "details": "Details:",
+    "details": "View details",
     "areYouSure": "Are you sure?",
     "clearWinningInfoConfirm": "This operation will clear the winning information of the person. Do you want to continue?",
-    "deleteAllPersonnelConfirm": "This operation will delete all personnel data. Do you want to continue?"
+    "deleteAllPersonnelConfirm": "This operation will delete all personnel data. Do you want to continue?",
+    "deleteAllWinnersConfirm": "This operation will delete all winners data. Do you want to continue?"
   },
   "music": {
     "title": "Music configuration",

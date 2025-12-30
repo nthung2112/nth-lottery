@@ -95,6 +95,7 @@
     "deletePerson": "Xóa người",
     "clearAll": "Xóa tất cả",
     "deleteAll": "Xóa tất cả",
+    "resetAll": "Đặt lại tất cả",
     "downloadTemplate": "Tải xuống mẫu",
     "downloadTemplateTooltip": "Sau khi tải xuống tệp, vui lòng điền dữ liệu vào excel và lưu ở định dạng xlsx",
     "uploadFileTooltip": "Tải lên tệp excel đã sửa đổi",
@@ -114,10 +115,11 @@
     "prize": "Giải thưởng",
     "timeOfWinning": "Thời gian trúng thưởng",
     "movedToNonWinners": "Chuyển đến danh sách người không thắng",
-    "details": "Chi tiết:",
+    "details": "Xem chi tiết",
     "areYouSure": "Bạn có chắc không?",
     "clearWinningInfoConfirm": "Thao tác này sẽ xóa thông tin trúng thưởng của người này. Bạn có muốn tiếp tục không?",
-    "deleteAllPersonnelConfirm": "Thao tác này sẽ xóa tất cả dữ liệu nhân sự. Bạn có muốn tiếp tục không?"
+    "deleteAllPersonnelConfirm": "Thao tác này sẽ xóa tất cả dữ liệu nhân sự. Bạn có muốn tiếp tục không?",
+    "deleteAllWinnersConfirm": "Thao tác này sẽ xóa tất cả dữ liệu người chiến thắng. Bạn có muốn tiếp tục không?"
   },
   "music": {
     "title": "Cấu hình âm nhạc",

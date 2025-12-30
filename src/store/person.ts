@@ -153,6 +153,7 @@ export const usePersonStore = create<PersonState>()(
             item.prizeId = [];
           });
           state.personConfig.alreadyPersonList = [];
+          usePrizeStore.getState().resetPrizeUsage();
         }),
 
       setDefaultPersonList: () =>

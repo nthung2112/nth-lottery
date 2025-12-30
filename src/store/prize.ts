@@ -20,6 +20,7 @@ interface PrizeState {
   setTemporaryPrizeValue: (prizeItem: IPrizeConfig) => void;
   resetTemporaryPrize: () => void;
   resetDefault: () => void;
+  resetPrizeUsage: () => void;
 }
 
 const initialTemporaryPrize: IPrizeConfig = {
@@ -135,6 +136,23 @@ export const usePrizeStore = create<PrizeState>()(
         }),
 
       resetDefault: () => set(() => initialState),
+      resetPrizeUsage: () =>
+        set((state) => {
+          state.prizeConfig.prizeList.forEach((item) => {
+            item.isUsedCount = 0;
+            item.isUsed = false;
+            if (item.separateCount && item.separateCount.countList) {
+              item.separateCount.countList.forEach((countItem) => {
+                countItem.isUsedCount = 0;
+              });
+            }
+          });
+          // Also reset currentPrize if it was marked as used
+          const firstPrize = state.prizeConfig.prizeList[0];
+          if (firstPrize) {
+            state.prizeConfig.currentPrize = firstPrize;
+          }
+        }),
     })),
     {
       name: "prize-storage",
