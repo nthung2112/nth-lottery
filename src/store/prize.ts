@@ -21,6 +21,7 @@ interface PrizeState {
   resetTemporaryPrize: () => void;
   resetDefault: () => void;
   resetPrizeUsage: () => void;
+  removePrizeUsage: (prizeIds: string[]) => void;
 }
 
 const initialTemporaryPrize: IPrizeConfig = {
@@ -152,6 +153,37 @@ export const usePrizeStore = create<PrizeState>()(
           if (firstPrize) {
             state.prizeConfig.currentPrize = firstPrize;
           }
+        }),
+      removePrizeUsage: (prizeIds) =>
+        set((state) => {
+          if (prizeIds.length <= 0) return;
+          prizeIds.forEach((prizeId) => {
+            const prizeIndex = state.prizeConfig.prizeList.findIndex((p) => p.id === prizeId);
+            if (prizeIndex <= -1) {
+              return;
+            }
+            const prize = state.prizeConfig.prizeList[prizeIndex];
+            // Decrement the used count
+            prize.isUsedCount = Math.max(0, prize.isUsedCount - 1);
+            prize.isUsed = prize.isUsedCount < prize.count ? false : prize.isUsed;
+
+            // Update separateCount if it exists
+            if (prize.separateCount?.enable && prize.separateCount.countList.length > 0) {
+              // Find the last non-zero countList item and decrement it
+              const countList = prize.separateCount.countList;
+              for (let i = countList.length - 1; i >= 0; i--) {
+                if (countList[i].isUsedCount > 0) {
+                  countList[i].isUsedCount = Math.max(0, countList[i].isUsedCount - 1);
+                  break;
+                }
+              }
+            }
+
+            // Update currentPrize if it matches the one we just changed
+            if (state.prizeConfig.currentPrize.id === prizeId) {
+              state.prizeConfig.currentPrize = prize;
+            }
+          });
         }),
     })),
     {

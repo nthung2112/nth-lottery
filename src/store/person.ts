@@ -82,42 +82,7 @@ export const usePersonStore = create<PersonState>()(
 
           // Update prize statistics in the prize store
           if (prizeIds.length > 0) {
-            const prizeStore = usePrizeStore.getState();
-            const prizeList = prizeStore.prizeConfig.prizeList;
-
-            prizeIds.forEach((prizeId) => {
-              const prize = prizeList.find((p) => p.id === prizeId);
-              if (prize) {
-                // Decrement the used count
-                const updatedPrize = {
-                  ...prize,
-                  isUsedCount: Math.max(0, prize.isUsedCount - 1),
-                  isUsed: prize.isUsedCount - 1 < prize.count ? false : prize.isUsed,
-                };
-
-                // Update separateCount if it exists
-                if (prize.separateCount?.enable && prize.separateCount.countList.length > 0) {
-                  // Find the last non-zero countList item and decrement it
-                  const countList = [...prize.separateCount.countList];
-                  for (let i = countList.length - 1; i >= 0; i--) {
-                    if (countList[i].isUsedCount > 0) {
-                      countList[i] = {
-                        ...countList[i],
-                        isUsedCount: Math.max(0, countList[i].isUsedCount - 1),
-                      };
-                      break;
-                    }
-                  }
-                  updatedPrize.separateCount = {
-                    ...prize.separateCount,
-                    countList,
-                  };
-                }
-
-                // Update the prize in the store
-                prizeStore.setCurrentPrize(updatedPrize);
-              }
-            });
+            usePrizeStore.getState().removePrizeUsage(prizeIds);
           }
         }),
 
